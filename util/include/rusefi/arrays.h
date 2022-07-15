@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <cstring>
 
+#include "scaled_channel.h"
+
 /**
  * Copies an array from src to dest.  The lengths of the arrays must match.
  */
