@@ -6,3 +6,5 @@ Set variable `$(RUSEFI_LIB)` to the path to the folder that contains this readme
 Include the mk files of the modules that you want, then add:
 - `$(RUSEFI_LIB_INC)` to your list of includes
 - `$(RUSEFI_LIB_CPP)` to your list of c++ input files
+
+Currently, C++17 is required to compile these libraries.
