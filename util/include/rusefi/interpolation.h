@@ -2,6 +2,7 @@
 
 #include <cstdint>
 
+#include "isnan.h"
 #include "scaled_channel.h"
 
 namespace priv {
