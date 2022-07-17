@@ -39,3 +39,26 @@ constexpr void copyArrayPartial(TElement (&dest)[NDest], const TElement (&src)[N
 		dest[i] = src[i];
 	}
 }
+
+namespace efi
+{
+template <typename T, size_t N>
+constexpr size_t size(const T(&)[N]) {
+    return N;
+}
+
+// Zero the passed object
+template <typename T>
+constexpr void clear(T* obj) {
+	// The cast to void* is to prevent errors like:
+	//    clearing an object of non-trivial type 'struct persistent_config_s'; use assignment or value-initialization instead
+	// This is technically wrong, but we know config objects only ever actually
+	// contain integral types, though they may be wrapped in a scaled_channel
+	memset(reinterpret_cast<void*>(obj), 0, sizeof(T));
+}
+
+template <typename T>
+constexpr void clear(T& obj) {
+	clear(&obj);
+}
+} // namespace efi
