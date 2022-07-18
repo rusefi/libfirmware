@@ -8,6 +8,6 @@ RUSEFI_LIB_CPP += \
 
 RUSEFI_LIB_CPP_TEST += \
 	$(RUSEFI_LIB)/util/test/test_arrays.cpp \
-	$(RUSEFI_LIB)/util/test/test_framgents.cpp \
+	$(RUSEFI_LIB)/util/test/test_fragments.cpp \
 	$(RUSEFI_LIB)/util/test/test_math.cpp \
 

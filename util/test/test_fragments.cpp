@@ -27,7 +27,7 @@ static void resetBuffer() {
 	memset(buffer, 0xFF, sizeof(buffer));
 }
 
-TEST(outputs, fragments) {
+TEST(Util_Fragments, fragments) {
 	static_assert(4 == efi::size(fragmentBuffer));
 
 	FragmentList fragments{ fragmentBuffer, efi::size(fragmentBuffer) };
