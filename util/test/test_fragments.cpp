@@ -1,4 +1,9 @@
 #include <rusefi/fragments.h>
+#include <rusefi/arrays.h>
+
+#include <gtest/gtest.h>
+
+#include <cstring>
 
 struct obj1 {
 	const uint8_t x[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
