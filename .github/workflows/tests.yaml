@@ -32,26 +32,18 @@ jobs:
       run: gcc -v
 
     - name: Build Tests
-      working-directory: ./unit_tests/
       run: make -j4 SANITIZE=yes
 
     - name: Run Tests
-      working-directory: ./unit_tests/
       run: ASAN_OPTIONS=detect_stack_use_after_return=1 build/libfirmware_test
-
-    - name: Run Tests (sharded)
-      working-directory: ./unit_tests/
-      run: bash ./run_sharded_tests.sh
 
     - name: Rebuild Tests For Valgrind
       # Valgrind isn't compatible with address sanitizer, so we have to rebuild the code
       if: ${{ matrix.os != 'macos-latest' }}
-      working-directory: ./unit_tests/
       run: |
         make clean
         make -j4 SANITIZE=no
 
     - name: Run Tests (Valgrind)
       if: ${{ matrix.os != 'macos-latest' }}
-      working-directory: ./unit_tests/
       run: valgrind --error-exitcode=1 --leak-check=no build/libfirmware_test
