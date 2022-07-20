@@ -13,4 +13,4 @@ Currently, C++17 is required to compile these libraries.
 
 ## Unit tests:
 
-TODO
+Simply run `make && build/libfirmware_test` from the root directory. Just requires normal GCC or clang, on Mac/Linux/WSL/probably mingw32.
