@@ -5,8 +5,6 @@
 
 TEST(Util_Math, ExpTaylor)
 {
-    float x = -2;
-
     // test from -2 < x < 0
     for(float x = -2; x < 0; x += 0.05)
     {

@@ -40,6 +40,20 @@ TEST(Util_Fragments, fragments) {
 	resetBuffer();
 
 	{
+		// Exactly copy both buffers
+		uint8_t expected[] = { 
+			1, 2, 3, 4, 5, 6, 7, 8, 9, 10,	// buffer10
+			11, 12, 13, 14, 15,				// buffer5
+			0, 0, 0, 0, 0,					// null obj2
+			1, 2, 3, 4, 5, 6, 7, 8, 9, 10	// buffer10 again
+		};
+		copyRange(buffer, fragments, 0, 10 + 5 + 5 + 10);
+		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+	}
+
+	resetBuffer();
+
+	{
 		// Check overlap between first and second fragments
 		uint8_t expected[] = {9, 10, 11, 12, 13};
 		copyRange(buffer, fragments, 8, 5);
