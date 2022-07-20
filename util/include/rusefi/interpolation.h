@@ -68,7 +68,7 @@ BinResult getBin(float value, const scaled_channel<TBin, TMult, TDiv> (&bins)[TS
 	return getBin(value * (float(TMult) / TDiv), *reinterpret_cast<const TBin (*)[TSize]>(&bins));
 }
 
-static float linterp(float low, float high, float frac)
+static inline float linterp(float low, float high, float frac)
 {
 	return high * frac + low * (1 - frac);
 }
