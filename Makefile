@@ -47,10 +47,6 @@ ifeq ($(USE_OPT),)
   USE_OPT += -Werror=missing-field-initializers -Wno-error=sign-compare
 endif
 
-ifeq ($(COVERAGE),yes)
-	USE_OPT += -fprofile-arcs -ftest-coverage
-endif
-
 # See explanation in main firmware Makefile for these three defines
 USE_OPT += -DEFI_UNIT_TEST=1 -DEFI_PROD_CODE=0 -DEFI_SIMULATOR=0
 
@@ -181,10 +177,6 @@ ULIBDIR =
 
 # List all user libraries here
 ULIBS = -lm
-
-ifeq ($(COVERAGE),yes)
-	ULIBS += --coverage
-endif
 
 ifeq ($(SANITIZE),yes)
 	ULIBS += -fsanitize=address -fsanitize=undefined
