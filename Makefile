@@ -47,8 +47,6 @@ ifeq ($(USE_OPT),)
   USE_OPT += -Werror=missing-field-initializers
 endif
 
-USE_OPT += -Wno-error=sign-compare
-
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
   USE_COPT = -std=gnu99 -fgnu89-inline
@@ -123,7 +121,7 @@ BIN  = $(CP) -O binary
 CWARN = -Wall -Wextra -Wstrict-prototypes -pedantic -Wmissing-prototypes -Wold-style-definition
 
 # Define C++ warning options here
-CPPWARN = -Wall -Wextra -Werror -pedantic
+CPPWARN = -Wall -Wextra -Werror -pedantic -Wno-error=sign-compare
 
 #
 # Compiler settings
