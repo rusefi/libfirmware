@@ -8,10 +8,12 @@ PROJECT_DIR = .
 # Imported source files and paths
 RUSEFI_LIB = .
 include $(RUSEFI_LIB)/util/util.mk
+include $(RUSEFI_LIB)/pt2001/pt2001.mk
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
-CSRC +=
+CSRC += \
+	$(RUSEFI_LIB_C) \
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
