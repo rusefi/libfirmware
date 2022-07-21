@@ -14,9 +14,7 @@
  * @author Matthew Kennedy
  */
 
-#include "pt2001.h"
-#include "pt2001_memory_map.h"
-
+#include <rusefi/pt2001.h>
 #include <rusefi/arrays.h>
 
 #include <PT2001_LoadData.h>
