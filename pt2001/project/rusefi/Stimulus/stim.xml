@@ -1,0 +1,4 @@
+<Stimuli>
+  <Stimulus target="Start1" time="1 ms" period="" value="high" />
+  <Stimulus target="Start1" time="3 ms" period="" value="low" />
+</Stimuli>
