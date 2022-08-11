@@ -19,7 +19,7 @@
 
 #include <PT2001_LoadData.h>
 
-void chThdSleepMilliseconds(int) { }
+#include <ch.h>
 
 const int MC_CK = 6; // PLL x24 / CLK_DIV 4 = 6Mhz
 
@@ -111,6 +111,8 @@ static uint16_t dacEquation(float current) {
 }
 
 void Pt2001Base::setTimings() {
+	setBoostVoltage(getBoostVoltage());
+
 	// Convert mA to DAC values
 	writeDram(MC33816Mem::Iboost, dacEquation(getBoostCurrent()));
 	writeDram(MC33816Mem::Ipeak, dacEquation(getPeakCurrent()));
@@ -416,14 +418,13 @@ bool Pt2001Base::restart() {
 
 	// Start with everything off
 	shutdown();
+	deselect();
+	chThdSleepMilliseconds(10);
 
 	if (getVbatt() < 8) {
 		// efiPrintf("GDI not Restarting until we see VBatt");
 		return false;
 	}
-
-	// Does starting turn this high to begin with??
-	deselect();
 
 	//delay/wait? .. possibly only 30us for each needed, per datasheet
 	setResetB(false);
@@ -474,6 +475,10 @@ bool Pt2001Base::restart() {
 
 	// Finished downloading, let's run the code
 	enableFlash();
+
+	// give it a moment to take effect
+	chThdSleepMilliseconds(10);
+
 	if (!checkFlash()) {
 		onError("MC33 no flash");
 		shutdown();
@@ -487,8 +492,7 @@ bool Pt2001Base::restart() {
 		return false;
 	}
 
-	// Drive High Voltage if possible
-	setBoostVoltage(getBoostVoltage());
+	// Drive High Voltage
 	setDriveEN(true); // driven = HV
 	chThdSleepMilliseconds(10); // Give it a moment
 	status = readDriverStatus();
