@@ -430,6 +430,7 @@ bool Pt2001Base::restart() {
 	setResetB(true);
 	chThdSleepMilliseconds(1);
 
+	// Flag0 should be floating - pulldown means it should read low
 	flag0before = readFlag0();
 
 	setupSpi();
@@ -452,11 +453,9 @@ bool Pt2001Base::restart() {
 	downloadRam(CODE_RAM1);        // transfers code RAM1
 	downloadRam(CODE_RAM2);        // transfers code RAM2
 	downloadRam(DATA_RAM);         // transfers data RAM
-	/**
-	 * current configuration of REG_MAIN would toggle flag0 from LOW to HIGH
-	 */
 	downloadRegister(REG_MAIN);    // download main register configurations
 
+	// current configuration of REG_MAIN would toggle flag0 from LOW to HIGH
 	flag0after = readFlag0();
 	if (flag0before || !flag0after) {
 		onError("MC33 flag0 transition no buena");
