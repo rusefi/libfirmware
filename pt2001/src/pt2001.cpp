@@ -419,18 +419,16 @@ bool Pt2001Base::restart() {
 	// Start with everything off
 	shutdown();
 	deselect();
-	chThdSleepMilliseconds(10);
 
 	if (getVbatt() < 8) {
 		// efiPrintf("GDI not Restarting until we see VBatt");
 		return false;
 	}
 
-	//delay/wait? .. possibly only 30us for each needed, per datasheet
-	setResetB(false);
-	chThdSleepMilliseconds(10);
+	// Wait for chip to reset, then release reset and wait again
+	chThdSleepMilliseconds(1);
 	setResetB(true);
-	chThdSleepMilliseconds(10);
+	chThdSleepMilliseconds(1);
 
 	flag0before = readFlag0();
 
