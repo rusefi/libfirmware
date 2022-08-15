@@ -19,8 +19,6 @@
 
 #include <PT2001_LoadData.h>
 
-#include <ch.h>
-
 const int MC_CK = 6; // PLL x24 / CLK_DIV 4 = 6Mhz
 
 const int MAX_SPI_MODE_A_TRANSFER_SIZE = 31;  //max size for register config transfer
@@ -426,9 +424,9 @@ bool Pt2001Base::restart() {
 	}
 
 	// Wait for chip to reset, then release reset and wait again
-	chThdSleepMilliseconds(1);
+	sleepMs(1);
 	setResetB(true);
-	chThdSleepMilliseconds(1);
+	sleepMs(1);
 
 	// Flag0 should be floating - pulldown means it should read low
 	flag0before = readFlag0();
@@ -474,7 +472,7 @@ bool Pt2001Base::restart() {
 	enableFlash();
 
 	// give it a moment to take effect
-	chThdSleepMilliseconds(10);
+	sleepMs(10);
 
 	if (!checkFlash()) {
 		onError("MC33 no flash");
@@ -491,7 +489,7 @@ bool Pt2001Base::restart() {
 
 	// Drive High Voltage
 	setDriveEN(true); // driven = HV
-	chThdSleepMilliseconds(10); // Give it a moment
+	sleepMs(10); // Give it a moment
 	status = readDriverStatus();
 	if (!checkDrivenEnabled(status)) {
 		onError("MC33 Driven did not stick!");

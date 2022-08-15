@@ -97,4 +97,7 @@ protected:
 
 	// Print out an error message
 	virtual void onError(const char* why) = 0;
+
+	// Sleep for some number of milliseconds
+	virtual void sleepMs(size_t ms) = 0;
 };
