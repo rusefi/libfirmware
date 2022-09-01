@@ -1,3 +1,7 @@
+/**
+ * @file interpolation.h
+ */
+
 #pragma once
 
 #include <cstdint>
