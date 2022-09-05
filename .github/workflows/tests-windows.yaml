@@ -19,7 +19,7 @@ jobs:
         run: make -v
 
 # huh? how come this does not work? :(
-      - name: Compile
-        working-directory: .
-        run: make
-
+#      - name: Compile
+#        working-directory: .
+#        run: make
+#
