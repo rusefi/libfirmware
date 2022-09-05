@@ -1,0 +1,15 @@
+name: Unit Tests on Windows
+
+on: [push,pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Install GCC
+        uses: egor-tensin/setup-gcc@v1
+
+      - name: Print GCC version
+        working-directory: .
+        run: gcc -v
