@@ -7,6 +7,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
+
       - name: Install GCC
         uses: egor-tensin/setup-gcc@v1
 
