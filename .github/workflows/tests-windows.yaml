@@ -10,9 +10,26 @@ jobs:
       - name: Set up MinGW
         uses: egor-tensin/setup-mingw@v2
 
-      - name: Install GCC
-        uses: egor-tensin/setup-gcc@v1
+#      - name: Install GCC
+#        uses: egor-tensin/setup-gcc@v1
+
+      - name: Print GCC version
+        working-directory: .
+        run: x86_64-w64-mingw32-gcc -v
 
       - name: Print GCC version
         working-directory: .
         run: gcc -v
+
+      - name: Print make version
+        working-directory: .
+        run: make -v
+
+      - name: Print make version
+        working-directory: .
+        run: mingw32-make -v
+
+      - name: Compile
+        working-directory: .
+        run: mingw32-make
+
