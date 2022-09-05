@@ -1,3 +1,7 @@
+/**
+ * @file scaled_channel.h
+ */
+
 #pragma once
 
 #include <cmath>
