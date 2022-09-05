@@ -31,7 +31,14 @@ INCDIR += \
 	$(PROJECT_DIR)/ext/googletest/googletest/include \
 	$(RUSEFI_LIB_INC) \
 
-SANITIZE = yes
+# User may want to pass in a forced value for SANITIZE
+ifeq ($(SANITIZE),)
+	ifneq ($(OS),Windows_NT)
+		SANITIZE = yes
+	else
+		SANITIZE = no
+	endif
+endif
 
 IS_MAC = no
 ifneq ($(OS),Windows_NT)
