@@ -226,7 +226,7 @@ void Pt2001Base::downloadRam(int target) {
 	uint16_t codeWidthRegAddr = 0;   // code width register address
 	uint16_t size = 0;               // size of RAM data
 	uint16_t command = 0;            // command data
-	const uint16_t *RAM_ptr;               // pointer to array of data to be sent to the chip
+	const uint16_t *RAM_ptr = nullptr;               // pointer to array of data to be sent to the chip
 
 	//Why Again? For Every time, just in case?
 	setupSpi();
@@ -291,7 +291,7 @@ void Pt2001Base::downloadRegister(int r_target) {
 	uint16_t r_size = 0;           // size of configuration data
 	uint16_t r_command = 0;        // command data
 	uint16_t remainder_size = 0;   // remainder size
-	const uint16_t *reg_ptr;            // pointer to array of data to be sent to the chip
+	const uint16_t *reg_ptr = nullptr;            // pointer to array of data to be sent to the chip
 
 	switch(r_target)                     // selects target
 	{
