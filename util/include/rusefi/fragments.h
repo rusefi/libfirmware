@@ -10,15 +10,35 @@
 #include <cstddef>
 #include <cstdint>
 
+// Implement overloads of this function in your project for each live data
+// struct you want to fetch
+// for example:
+// struct myData { };
+//
+// template<>
+// const myData* getLiveDataStruct(size_t index) { return ...; }
+template <typename TStruct>
+const TStruct* getLiveData(size_t index);
+
+template <typename TValue, int TIndex = 0>
+struct decl_frag { };
+
 struct FragmentEntry {
-	template <typename TData>
-	FragmentEntry(const TData* data)
-		: data(reinterpret_cast<const uint8_t*>(data))
+	template <typename TData, int TIndex>
+	FragmentEntry(decl_frag<TData, TIndex>)
+		: func((const uint8_t*(*)(size_t))getLiveData<TData>)
+		, index(TIndex)
 		, size(sizeof(TData))
 	{
 	}
 
-	const uint8_t* const data;
+	const uint8_t* get() const {
+		return func(index);
+	}
+
+	const uint8_t *(*const func)(size_t);
+	const size_t index;
+
 	const size_t size;
 };
 

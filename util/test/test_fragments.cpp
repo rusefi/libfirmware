@@ -20,11 +20,25 @@ static_assert(sizeof(obj2) == 5);
 obj1 buffer10;
 obj2 buffer5;
 
+template<>
+const obj1* getLiveData(size_t) {
+	return &buffer10;
+}
+
+template<>
+const obj2* getLiveData(size_t idx) {
+	if (idx == 1) {
+		return nullptr;
+	}
+
+	return &buffer5;
+}
+
 static FragmentEntry fragmentBuffer[] = {
-		&buffer10,
-		&buffer5,
-		reinterpret_cast<obj2*>(0),	// null fragment for fun
-		&buffer10
+	decl_frag<obj1>{},
+	decl_frag<obj2, 0>{},
+	decl_frag<obj2, 1>{},	// this one will be null
+	decl_frag<obj1>{},
 };
 
 static uint8_t buffer[120];

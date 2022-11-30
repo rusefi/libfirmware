@@ -29,7 +29,7 @@ void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size)
 		}
 
 		int copyNowSize = minI(size, src.fragments[fragmentIndex].size - skip);
-		const uint8_t* fromBase = src.fragments[fragmentIndex].data;
+		const uint8_t* fromBase = src.fragments[fragmentIndex].get();
 		if (!fromBase) {
 			// we have no buffer for this fragment - fill with zeroes
 			memset(destination + destinationIndex, 0, copyNowSize);
