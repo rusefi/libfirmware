@@ -49,3 +49,6 @@ struct FragmentList {
 
 // copy `size` of fragmented outputs in to destination, skipping the first `skip` bytes
 void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size);
+// returns pointer to actual data and size of contiguous data
+// if data is located in more than one fragmnet - returned value will be size available in first fragment
+size_t getRangePtr(uint8_t **ptr, FragmentList src, size_t offset, size_t size);
