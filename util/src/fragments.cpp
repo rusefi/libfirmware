@@ -14,7 +14,7 @@ void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size)
 	size_t fragmentIndex = 0;
 
 	// Find which fragment to start - skip any full fragments smaller than `skip` parameter
-	while (fragmentIndex < src.count && skip > src.fragments[fragmentIndex].size) {
+	while (fragmentIndex < src.count && skip >= src.fragments[fragmentIndex].size) {
 		skip -= src.fragments[fragmentIndex].size;
 		fragmentIndex++;
 	}
