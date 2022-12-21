@@ -63,6 +63,36 @@ TEST(Util_Fragments, fragments) {
 		};
 		copyRange(buffer, fragments, 0, 10 + 5 + 5 + 10);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t offset = 0;
+		size_t ret;
+		/* pointer to first fragment */
+		ret = getRangePtr(&ptr, fragments, offset, 10 + 5 + 5 + 10);
+		EXPECT_TRUE( 10 == ret);
+		EXPECT_TRUE( 0 == std::memcmp(ptr, expected, ret));
+		EXPECT_TRUE( fragmentBuffer[0].get() == ptr);
+
+		offset += ret;
+		/* pointer to second fragment */
+		ret = getRangePtr(&ptr, fragments, offset, 5 + 5 + 10);
+		EXPECT_TRUE( 5 == ret);
+		EXPECT_TRUE( 0 == std::memcmp(ptr, expected + 10, ret));
+		EXPECT_TRUE( fragmentBuffer[1].get() == ptr);
+
+		offset += ret;
+		/* pointer to null */
+		ret = getRangePtr(&ptr, fragments, offset, 5 + 10);
+		EXPECT_TRUE( 5 == ret);
+		EXPECT_TRUE( NULL == ptr);
+		EXPECT_TRUE( fragmentBuffer[2].get() == ptr);
+
+		offset += ret;
+		/* pointer to fourth fragment */
+		ret = getRangePtr(&ptr, fragments, offset, 10);
+		EXPECT_TRUE( 10 == ret);
+		EXPECT_TRUE( 0 == std::memcmp(ptr, expected + 10 + 5 + 5, ret));
+		EXPECT_TRUE( fragmentBuffer[3].get() == ptr);
 	}
 
 	resetBuffer();
@@ -72,6 +102,18 @@ TEST(Util_Fragments, fragments) {
 		uint8_t expected[] = {9, 10, 11, 12, 13};
 		copyRange(buffer, fragments, 8, 5);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t offset = 8;
+		size_t ret;
+		ret = getRangePtr(&ptr, fragments, offset, 5);
+		EXPECT_TRUE( 2 == ret);
+		EXPECT_TRUE( fragmentBuffer[0].get() + 8 == ptr);
+
+		offset += ret;
+		ret = getRangePtr(&ptr, fragments, offset, 5 - 2);
+		EXPECT_TRUE( 3 == ret);
+		EXPECT_TRUE( fragmentBuffer[1].get() + 0 == ptr);
 	}
 
 	resetBuffer();
@@ -81,6 +123,12 @@ TEST(Util_Fragments, fragments) {
 		uint8_t expected[] = {13, 14, 15};
 		copyRange(buffer, fragments, 12, 3);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t ret;
+		ret = getRangePtr(&ptr, fragments, 12, 3);
+		EXPECT_TRUE( 3 == ret);
+		EXPECT_TRUE( fragmentBuffer[1].get() + 2 == ptr);
 	}
 
 	resetBuffer();
@@ -90,6 +138,18 @@ TEST(Util_Fragments, fragments) {
 		uint8_t expected[] = {15, 0, 0};
 		copyRange(buffer, fragments, 14, 3);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t offset = 14;
+		size_t ret;
+		ret = getRangePtr(&ptr, fragments, offset, 5);
+		EXPECT_TRUE( 1 == ret);
+		EXPECT_TRUE( fragmentBuffer[1].get() + 4 == ptr);
+
+		offset += ret;
+		ret = getRangePtr(&ptr, fragments, offset, 5 - 1);
+		EXPECT_TRUE( 4 == ret);
+		EXPECT_TRUE( NULL == ptr);
 	}
 
 	resetBuffer();
@@ -99,6 +159,18 @@ TEST(Util_Fragments, fragments) {
 		uint8_t expected[] = {0, 1, 2};
 		copyRange(buffer, fragments, 19, 3);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t offset = 19;
+		size_t ret;
+		ret = getRangePtr(&ptr, fragments, offset, 3);
+		EXPECT_TRUE( 1 == ret);
+		EXPECT_TRUE( NULL == ptr);
+
+		offset += ret;
+		ret = getRangePtr(&ptr, fragments, offset, 3 - 1);
+		EXPECT_TRUE( 2 == ret);
+		EXPECT_TRUE( fragmentBuffer[3].get() == ptr);
 	}
 
 	resetBuffer();
@@ -108,6 +180,18 @@ TEST(Util_Fragments, fragments) {
 		uint8_t expected[] = {9, 10, 0, 0};
 		copyRange(buffer, fragments, 28, 4);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t offset = 28;
+		size_t ret;
+		ret = getRangePtr(&ptr, fragments, offset, 4);
+		EXPECT_TRUE( 2 == ret);
+		EXPECT_TRUE( fragmentBuffer[3].get() + 8 == ptr);
+
+		offset += ret;
+		ret = getRangePtr(&ptr, fragments, offset, 4 - 2);
+		EXPECT_TRUE( 2 == ret);
+		EXPECT_TRUE( NULL == ptr);
 	}
 
 	resetBuffer();
@@ -117,5 +201,11 @@ TEST(Util_Fragments, fragments) {
 		uint8_t expected[] = {0, 0, 0};
 		copyRange(buffer, fragments, 1000, 3);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
+
+		uint8_t *ptr;
+		size_t ret;
+		ret = getRangePtr(&ptr, fragments, 1000, 3);
+		EXPECT_TRUE( 3 == ret);
+		EXPECT_TRUE( NULL == ptr);
 	}
 }

@@ -42,3 +42,26 @@ void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size)
 		fragmentIndex++;
 	}
 }
+
+size_t getRangePtr(uint8_t **ptr, FragmentList src, size_t offset, size_t size)
+{
+	size_t fragmentIndex = 0;
+
+	// Find which fragment to start - skip any full fragments smaller than `skip` parameter
+	while (fragmentIndex < src.count && offset >= src.fragments[fragmentIndex].size) {
+		offset -= src.fragments[fragmentIndex].size;
+		fragmentIndex++;
+	}
+
+	if (fragmentIndex >= src.count) {
+		// out of range
+		*ptr = NULL;
+		return size;
+	}
+
+	if (src.fragments[fragmentIndex].get() != NULL)
+		*ptr = (uint8_t *)src.fragments[fragmentIndex].get() + offset;
+	else
+		*ptr = NULL;
+	return minI(size, src.fragments[fragmentIndex].size - offset);
+}
