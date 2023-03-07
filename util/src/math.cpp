@@ -95,7 +95,6 @@ float tanf_taylor(float x) {
 }
 
 expected<float> NewtonsMethodSolver::solve(float x0, float deltaX, size_t maxIteration) {
-	// the same method works for R (if C is known) or C (if R is known)
 	float Xcur, Xnext;
 	Xnext = x0;
 
