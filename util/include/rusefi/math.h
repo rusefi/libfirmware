@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include <rusefi/expected.h>
+
+#include <cstddef>
+
 // absolute value
 int absI(int value);
 float absF(float value);
@@ -25,3 +29,18 @@ float expf_taylor(float x);
 // @brief Compute tan(theta) using a ratio of the Taylor series for sin and cos
 // Valid for the range [0, pi/2 - 0.01]
 float tanf_taylor(float theta);
+
+struct NewtonsMethodSolver
+{
+	// Solve for a value of x such that fx(x)=0
+	// x0 is the initial guess
+	// deltaX controls when to stop - when abs((estimate N) - (estimate N-1)) < deltaX, stop calculation.
+	// Returns unexpected if failed to converge
+	expected<float> solve(float x0, float deltaX, size_t maxIteration = 20);
+
+	// Function for which we want to find a root 0 = fx(x)
+	virtual float fx(float x) = 0;
+
+	// First derivative of fx(x)
+	virtual float dfx(float x) = 0;
+};

@@ -93,3 +93,20 @@ float tanf_taylor(float x) {
 	// tan = sin / cos
 	return sin_val / cos_val;
 }
+
+expected<float> NewtonsMethodSolver::solve(float x0, float deltaX, size_t maxIteration) {
+	// the same method works for R (if C is known) or C (if R is known)
+	float Xcur, Xnext;
+	Xnext = x0;
+
+	do {
+		if (maxIteration-- == 0) {
+			return unexpected;
+		}
+
+		Xcur = Xnext;
+		Xnext = Xcur - fx(Xcur) / dfx(Xcur);
+	} while (absF(Xnext - Xcur) > deltaX);
+
+	return Xnext;
+}
