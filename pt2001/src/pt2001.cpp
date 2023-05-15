@@ -134,7 +134,7 @@ void Pt2001Base::setTimings() {
 
 void Pt2001Base::setBoostVoltage(float volts) {
 	// Sanity checks, Datasheet says not too high, nor too low
-	if (volts > 65.0f) {
+	if (volts > 72.0f) {
 		onError("DI Boost voltage setpoint too high");
 		return;
 	}
