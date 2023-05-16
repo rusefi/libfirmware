@@ -72,6 +72,15 @@
     <Radix>Decimal</Radix>
   </Wave>
   <Wave>
+    <Name>CurrentFeedback1</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>0</Ordinal>
+    <Direction>Internal</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
     <Name>Cnt1</Name>
     <Path>
       <PathElement>PT2001</PathElement>
@@ -242,6 +251,234 @@
       <PathElement>PT2001</PathElement>
     </Path>
     <Ordinal>2</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Start3</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>8</Ordinal>
+    <Direction>Input</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Dac2</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>44</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Dac3</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>45</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Hs3Command</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>6</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Hs4Command</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>7</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Ls3Command</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>11</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>CurrentFeedback2</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>1</Ordinal>
+    <Direction>Internal</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Oaout2FlagOut</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>17</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Cnt1</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>0</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Cnt2</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>1</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Cnt3</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>2</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Cnt4</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>3</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Eoc1</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>4</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Eoc2</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>5</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Eoc3</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>6</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>Eoc4</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>7</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>TerminalCount1</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>8</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>TerminalCount2</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>9</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>TerminalCount3</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>10</Ordinal>
+    <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>TerminalCount4</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+      <PathElement>Injection Channel 1</PathElement>
+      <PathElement>ChSequencers</PathElement>
+      <PathElement>MicroMachineSeq1</PathElement>
+      <PathElement>Counters</PathElement>
+    </Path>
+    <Ordinal>11</Ordinal>
     <Direction>Output</Direction>
     <Radix>Decimal</Radix>
   </Wave>
