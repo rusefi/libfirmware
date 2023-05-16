@@ -2,7 +2,7 @@
   <Resistance>1000</Resistance>
   <Inductance>500</Inductance>
   <RSense>10</RSense>
-  <CurrentFeedback>CurFbk1</CurrentFeedback>
+  <CurrentFeedback>CurFbk2</CurrentFeedback>
   <FeedBackSource>Form</FeedBackSource>
   <OutputUsed number="3">
     <Output>Hs3Command</Output>
