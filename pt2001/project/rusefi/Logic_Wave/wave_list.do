@@ -72,6 +72,15 @@
     <Radix>Decimal</Radix>
   </Wave>
   <Wave>
+    <Name>CurrentFeedback1</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>0</Ordinal>
+    <Direction>Internal</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
     <Name>Cnt1</Name>
     <Path>
       <PathElement>PT2001</PathElement>
@@ -297,6 +306,15 @@
     </Path>
     <Ordinal>11</Ordinal>
     <Direction>Output</Direction>
+    <Radix>Decimal</Radix>
+  </Wave>
+  <Wave>
+    <Name>CurrentFeedback2</Name>
+    <Path>
+      <PathElement>PT2001</PathElement>
+    </Path>
+    <Ordinal>1</Ordinal>
+    <Direction>Internal</Direction>
     <Radix>Decimal</Radix>
   </Wave>
   <Wave>

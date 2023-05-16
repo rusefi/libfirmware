@@ -88,7 +88,7 @@
     <Input>FeedbackHs3Vsrc</Input>
     <Output>Hs3Command</Output>
     <SourceShared level="True">Hs4Command</SourceShared>
-    <ActuatorNumber>-1</ActuatorNumber>
+    <ActuatorNumber>-2</ActuatorNumber>
     <Current>0</Current>
     <AboveHigh>
       <Value>True</Value>
@@ -124,7 +124,7 @@
     <Input>FeedbackHs4Vsrc</Input>
     <Output>Hs4Command</Output>
     <SourceShared level="False">Hs3Command</SourceShared>
-    <ActuatorNumber>-1</ActuatorNumber>
+    <ActuatorNumber>-2</ActuatorNumber>
     <Current>0</Current>
     <AboveHigh>
       <Value>True</Value>
@@ -156,8 +156,32 @@
     </AboveLow>
   </Transition>
   <Transition threshold="False" type="1">
+    <Input>FeedbackLs2Vds</Input>
+    <Output>Ls2Command</Output>
+    <AboveHigh>
+      <Value>False</Value>
+      <Delay>500 ns</Delay>
+    </AboveHigh>
+    <AboveLow>
+      <Value>True</Value>
+      <Delay>500 ns</Delay>
+    </AboveLow>
+  </Transition>
+  <Transition threshold="False" type="1">
     <Input>FeedbackLs3Vds</Input>
     <Output>Ls3Command</Output>
+    <AboveHigh>
+      <Value>False</Value>
+      <Delay>500 ns</Delay>
+    </AboveHigh>
+    <AboveLow>
+      <Value>True</Value>
+      <Delay>500 ns</Delay>
+    </AboveLow>
+  </Transition>
+  <Transition threshold="False" type="1">
+    <Input>FeedbackLs4Vds</Input>
+    <Output>Ls4Command</Output>
     <AboveHigh>
       <Value>False</Value>
       <Delay>500 ns</Delay>

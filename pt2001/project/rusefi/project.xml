@@ -13,8 +13,8 @@
     <RegisterFile areaName="Channel 2 Configuration Registers (C2PR)">Registers\ch2_config_reg.hex</RegisterFile>
     <RegisterFile areaName="Diagnosis Configuration Registers (DCR)">Registers\diag_config_reg.hex</RegisterFile>
     <RegisterFile areaName="Crossbar Configuration Registers (XCR)">Registers\io_config_reg.hex</RegisterFile>
-    <MicroCodeFile channel="1" type="source" date="133287424524592163">MicrocodeCh1\ch1.psc</MicroCodeFile>
-    <MicroCodeFile channel="2" type="source" date="133287424535586377">MicrocodeCh2\ch2.psc</MicroCodeFile>
+    <MicroCodeFile channel="1" type="source" date="133287442290484143">MicrocodeCh1\ch1.psc</MicroCodeFile>
+    <MicroCodeFile channel="2" type="source" date="133287442303036622">MicrocodeCh2\ch2.psc</MicroCodeFile>
     <MicroCodeFile channel="1" type="binary" date="133287424468344753">bin\ch1.bin</MicroCodeFile>
     <MicroCodeFile channel="2" type="binary" date="133028335144648651">bin\ch2.bin</MicroCodeFile>
     <MicroCodeFile channel="1" type="hex" date="133287424469330378">bin\ch1.hex</MicroCodeFile>
@@ -23,9 +23,11 @@
     <DPramFile channel="2">Registers\dram2.hex</DPramFile>
     <LabelFile>labels.xml</LabelFile>
     <ActuatorFile>Actuator\inj1.xml</ActuatorFile>
+    <ActuatorFile>Actuator\inj2.xml</ActuatorFile>
+    <ActuatorFile>Actuator\inj3.xml</ActuatorFile>
+    <ActuatorFile>Actuator\inj4.xml</ActuatorFile>
     <ActuatorFile>Actuator\dcdc_current.xml</ActuatorFile>
     <ActuatorFile>Actuator\dcdc_voltage.xml</ActuatorFile>
-    <ActuatorFile>Actuator\inj3.xml</ActuatorFile>
     <VoltageFile>Feedbacks\dcdc_voltage.xml</VoltageFile>
     <StimulusFile>Stimulus\stim.xml</StimulusFile>
     <WaveFile>Logic_Wave\wave_list.do</WaveFile>
@@ -35,9 +37,9 @@
     <Clock>1 MHz</Clock>
   </General>
   <Windows>
-    <Structure x="2632" y="930" xSize="392" ySize="482" state="Normal" visible="True" />
-    <Signals x="670" y="433" xSize="250" ySize="1083" state="Normal" visible="True" />
-    <Micro x="9" y="3" xSize="1971" ySize="715" state="Normal" visible="True">
+    <Structure x="2516" y="1041" xSize="392" ySize="482" state="Normal" visible="True" />
+    <Signals x="715" y="467" xSize="250" ySize="1083" state="Normal" visible="True" />
+    <Micro x="12" y="12" xSize="1971" ySize="715" state="Normal" visible="True">
       <Hex8ForLine>True</Hex8ForLine>
       <SeparateCompiledFolder>True</SeparateCompiledFolder>
       <DPram channel="1" addressFormat="Hex">
@@ -362,11 +364,11 @@
         <Reg>Hex</Reg>
       </RegisterArea>
     </Micro>
-    <Log x="78" y="78" xSize="931" ySize="663" state="Normal" visible="True" />
-    <Wave x="964" y="9" xSize="1567" ySize="879" state="Normal" visible="True" />
-    <Current x="1030" y="973" xSize="1436" ySize="464" state="Normal" visible="True" />
-    <Stimulus x="519" y="1170" xSize="540" ySize="368" state="Normal" visible="False" />
-    <Voltage x="0" y="0" xSize="580" ySize="357" state="Normal" visible="False" />
-    <Actuator x="29" y="747" xSize="601" ySize="444" state="Normal" visible="True" />
+    <Log x="208" y="208" xSize="931" ySize="663" state="Normal" visible="True" />
+    <Wave x="1458" y="57" xSize="1567" ySize="1095" state="Normal" visible="True" />
+    <Current x="1034" y="1056" xSize="1436" ySize="464" state="Normal" visible="True" />
+    <Stimulus x="80" y="1202" xSize="540" ySize="368" state="Normal" visible="False" />
+    <Voltage x="684" y="1109" xSize="580" ySize="357" state="Normal" visible="False" />
+    <Actuator x="48" y="778" xSize="601" ySize="444" state="Normal" visible="True" />
   </Windows>
 </Project>

@@ -3,4 +3,8 @@
   <Stimulus target="Start1" time="3 ms" period="" value="low" />
   <Stimulus target="Start3" time="5 ms" period="" value="high" />
   <Stimulus target="Start3" time="7 ms" period="" value="low" />
+  <Stimulus target="Start4" time="11 ms" period="" value="high" />
+  <Stimulus target="Start4" time="13 ms" period="" value="low" />
+  <Stimulus target="Start2" time="15 ms" period="" value="high" />
+  <Stimulus target="Start2" time="17 ms" period="" value="low" />
 </Stimuli>
