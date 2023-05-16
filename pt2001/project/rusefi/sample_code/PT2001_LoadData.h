@@ -1,7 +1,7 @@
 /*******************************************************************************
 * Example Code
 *
-* Copyright(C) 2022 NXP Semiconductors
+* Copyright(C) 2023 NXP Semiconductors
 * NXP Semiconductors Confidential and Proprietary
 *
 * Software that is described herein is for illustrative purposes only

@@ -1,7 +1,7 @@
 /*******************************************************************************
 * Example Code
 *
-* Copyright(C) 2022 NXP Semiconductors
+* Copyright(C) 2023 NXP Semiconductors
 * NXP Semiconductors Confidential and Proprietary
 *
 * Software that is described herein is for illustrative purposes only
@@ -103,7 +103,7 @@ unsigned short PT2001_main_config[29] =
 unsigned short PT2001_ch1_config[19] =
 {
     0x0008, 0x0000, 0x0000, 0x0000, 0x0B13, 0x0000, 0x0000, 0x006C, 0x6B59, 0xC8A5, 
-    0x0000, 0x002C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    0x0000, 0x0036, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
 };
 
 // Data to be loaded into the CH2 register memory space
