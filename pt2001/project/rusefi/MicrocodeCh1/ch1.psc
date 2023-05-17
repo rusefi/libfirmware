@@ -13,6 +13,7 @@ init0:      stgn gain12.6 sssc;                     * Set the gain of the opamp 
 * ### Idle phase- the uPC loops here until start signal is present ###              
 idle0:      joslr inj1_start start1;                * Perform an actuation on inj1 if start 1 (only) is active
             joslr inj2_start start2;                * Perform an actuation on inj2 if start 2 (only) is active
+            joslr inj5_start start5;                * Perform an actuation on inj5 if start 5 (only) is active
             jmpf jr1;                               * If more than 1 start active at the same time(or none), no actuation
 
 * ### Shortcuts definition per the injector to be actuated ###
@@ -20,6 +21,9 @@ inj1_start: dfsct hs1 hs2 ls1;                      * Set the 3 shortcuts: VBAT,
             jmpr boost0;                            * Jump to launch phase
 
 inj2_start: dfsct hs1 hs2 ls2;                      * Set the 3 shortcuts: VBAT, VBOOST, LS
+            jmpr boost0;                            * Jump to launch phase
+
+inj5_start: dfsct hs1 hs2 ls5;                      * Set the 3 shortcuts: VBAT, VBOOST, LS
             jmpr boost0;                            * Jump to launch phase
 
 * ### Launch phase enable boost ###
@@ -106,6 +110,7 @@ init1:      stgn gain12.6 sssc;                     * Set the gain of the opamp 
 * ### Idle phase- the uPC loops here until start signal is present ###              
 idle1:      joslr inj3_start start3;                * Perform an actuation on inj1 if start 1 (only) is active
             joslr inj4_start start4;                * Perform an actuation on inj2 if start 2 (only) is active
+            joslr inj6_start start6;                * Perform an actuation on inj6 if start 6 (only) is active
             jmpf jr1;                               * If more than 1 start active at the same time(or none), no actuation            
             
 * ### Shortcuts definition per the injector to be actuated ###
@@ -113,6 +118,9 @@ inj3_start: dfsct hs3 hs4 ls3;                      * Set the 3 shortcuts: VBAT,
             jmpr boost1;                            * Jump to launch phase
 
 inj4_start: dfsct hs3 hs4 ls4;                      * Set the 3 shortcuts: VBAT, VBOOST, LS
+            jmpr boost1;                            * Jump to launch phase
+            
+inj6_start: dfsct hs3 hs4 ls6;                      * Set the 3 shortcuts: VBAT, VBOOST, LS
             jmpr boost1;                            * Jump to launch phase
 
 * ### Launch phase enable boost ###
