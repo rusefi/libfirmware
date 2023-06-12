@@ -483,8 +483,8 @@ bool Pt2001Base::restart() {
 		return false;
 	}
 
-    clearDriverStatus()
-    sleepMs(5)
+    clearDriverStatus();
+    sleepMs(5);
 
 	status = readDriverStatus();
 	status5 = readStatus(0x1A5);
