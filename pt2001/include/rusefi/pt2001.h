@@ -46,7 +46,12 @@ public:
 
     McFault fault = McFault::None;
     uint16_t status = 0;
-    uint16_t status2 = 0;
+    uint16_t status5 = 0;
+    uint16_t status6 = 0;
+    uint16_t status7 = 0;
+    uint16_t status8 = 0;
+
+	uint16_t readStatus(int reg);
 
 private:
 	// SPI tx/rx helpers
@@ -61,7 +66,7 @@ private:
 	// Chip init logic
 	void setupSpi();
 	uint16_t readId();
-	
+
 	void enableFlash();
 	bool checkFlash();
 
@@ -71,9 +76,7 @@ private:
 	// Chip IO helpers
 	uint16_t readDram(MC33816Mem addr);
 	void writeDram(MC33816Mem addr, uint16_t data);
-	uint16_t readStatus(int reg);
 	uint16_t readDriverStatus();
-	uint16_t readDriverStatus2();
 	void clearDriverStatus();
 
 protected:

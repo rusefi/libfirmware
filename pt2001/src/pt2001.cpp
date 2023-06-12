@@ -198,10 +198,6 @@ uint16_t Pt2001Base::readDriverStatus() {
 	return readStatus(0x1D2);
 }
 
-uint16_t Pt2001Base::readDriverStatus2() {
-    return readStatus(0x1A5);
-}
-
 static bool checkUndervoltVccP(uint16_t driverStatus){
 	return (driverStatus  & (1<<0));
 }
@@ -488,7 +484,10 @@ bool Pt2001Base::restart() {
 	}
 
 	status = readDriverStatus();
-	status2 = readDriverStatus2();
+	status5 = readStatus(0x1A5);
+	status6 = readStatus(0x1A6);
+	status7 = readStatus(0x1A7);
+	status8 = readStatus(0x1A8);
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltage7);
 		shutdown();
