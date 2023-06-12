@@ -71,6 +71,7 @@ private:
 	// Chip IO helpers
 	uint16_t readDram(MC33816Mem addr);
 	void writeDram(MC33816Mem addr, uint16_t data);
+	uint16_t readStatus(int reg);
 	uint16_t readDriverStatus();
 	uint16_t readDriverStatus2();
 	void clearDriverStatus();
