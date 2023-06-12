@@ -434,7 +434,7 @@ bool Pt2001Base::restart() {
 	setupSpi();
 
 	clearDriverStatus(); // Initial clear necessary
-	uint16_t status = readDriverStatus();
+	status = readDriverStatus();
 	if (checkUndervoltV5(status)) {
 		onError(McFault::UnderVoltage5);
 		shutdown();

@@ -45,6 +45,7 @@ public:
 	void setBoostVoltage(float volts);
 
     McFault fault = McFault::None;
+    uint16_t status = 0;
 
 private:
 	// SPI tx/rx helpers
