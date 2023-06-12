@@ -46,6 +46,7 @@ public:
 
     McFault fault = McFault::None;
     uint16_t status = 0;
+    uint16_t status2 = 0;
 
 private:
 	// SPI tx/rx helpers
@@ -71,6 +72,7 @@ private:
 	uint16_t readDram(MC33816Mem addr);
 	void writeDram(MC33816Mem addr, uint16_t data);
 	uint16_t readDriverStatus();
+	uint16_t readDriverStatus2();
 	void clearDriverStatus();
 
 protected:

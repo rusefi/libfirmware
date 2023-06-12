@@ -185,12 +185,21 @@ void Pt2001Base::clearDriverStatus(){
 	deselect();
 }
 
-uint16_t Pt2001Base::readDriverStatus(){
-	uint16_t driverStatus;
+uint16_t Pt2001Base::readDriverStatus() {
 	setupSpi(); // ensure on common page?
 	select();
 	send((0x8000 | 0x1D2 << 5) + 1);
-	driverStatus = recv();
+	uint16_t driverStatus = recv();
+	deselect();
+	return driverStatus;
+}
+
+uint16_t Pt2001Base::readDriverStatus2() {
+    // todo: shame on me extract method!
+	setupSpi(); // ensure on common page?
+	select();
+	send((0x8000 | 0x1A5 << 5) + 1);
+	uint16_t driverStatus = recv();
 	deselect();
 	return driverStatus;
 }
