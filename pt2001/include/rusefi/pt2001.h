@@ -14,6 +14,18 @@
 
 void initMc33816();
 
+enum class McFault : uint8_t
+{
+    None = 0,
+    NoFlash = 1,
+    UnderVoltageAfter = 2,
+    NoComm = 3,
+    flag0 = 4,
+    UnderVoltage5 = 5,
+    Driven = 6,
+    UnderVoltage7 = 7,
+};
+
 class Pt2001Base {
 public:
 	// Reinitialize the PT2001 chip, returns true if successful
@@ -22,11 +34,17 @@ public:
 	// Disable the PT2001 chip.
 	void shutdown();
 
+	void onError(McFault fault) {
+	    this->fault = fault;
+	}
+
 	// Re-read timing configuration and reconfigure the chip. This is safe to call while operating.
 	void setTimings();
 
 	// Set the boost voltage target. This is safe to call while operating.
 	void setBoostVoltage(float volts);
+
+    McFault fault = McFault::None;
 
 private:
 	// SPI tx/rx helpers

@@ -436,14 +436,14 @@ bool Pt2001Base::restart() {
 	clearDriverStatus(); // Initial clear necessary
 	uint16_t status = readDriverStatus();
 	if (checkUndervoltV5(status)) {
-		onError("MC33 5V Under-Voltage!");
+		onError(McFault::UnderVoltage5);
 		shutdown();
 		return false;
 	}
 
 	uint16_t chipId = readId();
 	if (!validateChipId(chipId)) {
-		onError("No comm with MC33");
+		onError(McFault::NoComm);
 		shutdown();
 		return false;
 	}
@@ -456,7 +456,7 @@ bool Pt2001Base::restart() {
 	// current configuration of REG_MAIN would toggle flag0 from LOW to HIGH
 	flag0after = readFlag0();
 	if (flag0before || !flag0after) {
-		onError("MC33 flag0 transition no buena");
+		onError(McFault::flag0);
 		shutdown();
 		return false;
 	}
@@ -475,14 +475,14 @@ bool Pt2001Base::restart() {
 	sleepMs(10);
 
 	if (!checkFlash()) {
-		onError("MC33 no flash");
+		onError(McFault::NoFlash);
 		shutdown();
 		return false;
 	}
 
 	status = readDriverStatus();
 	if (checkUndervoltVccP(status)) {
-		onError("MC33 VccP (7V) Under-Voltage!");
+		onError(McFault::UnderVoltage7);
 		shutdown();
 		return false;
 	}
@@ -492,14 +492,14 @@ bool Pt2001Base::restart() {
 	sleepMs(10); // Give it a moment
 	status = readDriverStatus();
 	if (!checkDrivenEnabled(status)) {
-		onError("MC33 Driven did not stick!");
+		onError(McFault::Driven);
 		shutdown();
 		return false;
 	}
 
 	status = readDriverStatus();
 	if (checkUndervoltVccP(status)) {
-		onError("MC33 VccP Under-Voltage After Driven"); // Likely DC-DC LS7 is dead!
+		onError(McFault::UnderVoltageAfter); // Likely DC-DC LS7 is dead!
 		shutdown();
 		return false;
 	}
