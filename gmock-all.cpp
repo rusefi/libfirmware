@@ -1,4 +1,4 @@
-// this is a work-around since our Makefile does not recognice .cc format
+// this is a work-around since our Makefile does not recognise .cc format
 // todo: adjust the makefile so that we can remove this
 
 // This line ensures that gmock.h can be compiled on its own, even
