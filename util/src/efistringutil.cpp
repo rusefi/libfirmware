@@ -75,6 +75,10 @@ bool strEqual(const char *str1, const char *str2) {
 	return true;
 }
 
+#ifndef ATOFF_BUFFER_SIZE
+#define ATOFF_BUFFER_SIZE 100
+#endif
+
 /**
  * string to float. NaN input is supported
  *
@@ -82,7 +86,7 @@ bool strEqual(const char *str1, const char *str2) {
  * todo: explicit value for error code? probably not, NaN is only returned in case of an error
  */
 float atoff(const char *param) {
-static char todofixthismesswithcopy[100];
+static char todofixthismesswithcopy[ATOFF_BUFFER_SIZE];
 
 	uint32_t totallen = strlen(param);
 	if (totallen > sizeof(todofixthismesswithcopy) - 1)
