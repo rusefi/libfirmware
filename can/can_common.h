@@ -5,6 +5,7 @@
 
 #define BENCH_TEST_BASE_ADDRESS 0x770000
 
+// todo: convert these commands into C++ enum and leverage enum2string code generator?
 // ECU output
 #define BENCH_TEST_EVENT_COUNTERS BENCH_TEST_BASE_ADDRESS
 // ECU output
