@@ -1,4 +1,4 @@
-RUSEFI_LIB_INC += $(RUSEFI_LIB)/util/include $(RUSEFI_LIB)/can $(RUSEFI_LIB)/board_id
+RUSEFI_LIB_INC += $(RUSEFI_LIB)/util/include $(RUSEFI_LIB)/util/include/rusefi/containers $(RUSEFI_LIB)/can $(RUSEFI_LIB)/board_id
 
 RUSEFI_LIB_CPP += \
 	$(RUSEFI_LIB)/util/src/util_dummy.cpp \
