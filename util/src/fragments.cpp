@@ -10,7 +10,7 @@
 #include <rusefi/math.h>
 #include <cstring>
 
-void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size) {
+size_t copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size) {
 	size_t fragmentIndex = 0;
 
 	// Find which fragment to start - skip any full fragments smaller than `skip` parameter
@@ -25,7 +25,7 @@ void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size)
 		if (fragmentIndex >= src.count) {
 			// somehow we are past the end of fragments - fill with zeros
 			memset(destination + destinationIndex, 0, size);
-			return;
+			return destinationIndex;
 		}
 
 		int copyNowSize = minI(size, src.fragments[fragmentIndex].size - skip);
@@ -41,6 +41,7 @@ void copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size)
 		size -= copyNowSize;
 		fragmentIndex++;
 	}
+	return destinationIndex;
 }
 
 size_t getRangePtr(uint8_t **ptr, FragmentList src, size_t offset, size_t size)
