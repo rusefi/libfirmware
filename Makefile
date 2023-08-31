@@ -20,7 +20,7 @@ CSRC += \
 CPPSRC += \
 	$(RUSEFI_LIB_CPP) \
 	$(RUSEFI_LIB_CPP_TEST) \
-	$(RUSEFI_LIB)/util/src/timer.cpp \
+	util/src/timer.cpp \
 	mock/lib-time-mocks.cpp \
 	gtest-all.cpp \
 	gmock-all.cpp \
