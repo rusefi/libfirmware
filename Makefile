@@ -20,6 +20,8 @@ CSRC += \
 CPPSRC += \
 	$(RUSEFI_LIB_CPP) \
 	$(RUSEFI_LIB_CPP_TEST) \
+	$(RUSEFI_LIB)/util/src/timer.cpp \
+	mock/lib-time-mocks.cpp \
 	gtest-all.cpp \
 	gmock-all.cpp \
 	gtest_main.cpp \
@@ -29,6 +31,7 @@ INCDIR += \
 	$(PROJECT_DIR)/ext/googletest/googlemock/include \
 	$(PROJECT_DIR)/ext/googletest/googletest \
 	$(PROJECT_DIR)/ext/googletest/googletest/include \
+	$(PROJECT_DIR)/mock \
 	$(RUSEFI_LIB_INC) \
 
 # User may want to pass in a forced value for SANITIZE
