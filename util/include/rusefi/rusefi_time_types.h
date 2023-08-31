@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <global.h>
 
 /**
  * We use a signed type here so that subtraction result is a proper negative value.
@@ -47,21 +46,10 @@ efitimeus_t getTimeNowUs();
  */
 efitick_t getTimeNowNt();
 
-// microseconds to ticks, but floating point
-// If converting a floating point time period, use this macro to avoid
-// the expensive conversions from int64 <-> float
-#define USF2NT(us_float) ((us_float) * US_TO_NT_MULTIPLIER)
-#define USF2MS(us_float) (0.001f * (us_float))
-
-// And back
-#define NT2US(x) ((x) / US_TO_NT_MULTIPLIER)
-#define NT2USF(x) (((float)(x)) / US_TO_NT_MULTIPLIER)
-
 #define MS_PER_SECOND 1000
 #define US_PER_SECOND 1000000
 #define US_PER_SECOND_F 1000000.0
 #define US_PER_SECOND_LL 1000000LL
-#define NT_PER_SECOND (US2NT(US_PER_SECOND_LL))
 
 #define MS2US(MS_TIME) ((MS_TIME) * 1000)
 #define US2MS(US_TIME) ((US_TIME) / 1000)

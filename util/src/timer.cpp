@@ -1,5 +1,6 @@
 
 #include <rusefi/timer.h>
+#include <rusefi/rusefi_time_math.h>
 
 Timer::Timer() {
 	init();

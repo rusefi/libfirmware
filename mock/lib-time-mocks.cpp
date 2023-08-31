@@ -1,4 +1,4 @@
-#include <rusefi/rusefi_time_types.h>
+#include <rusefi/rusefi_time_math.h>
 
 int timeNowUs = 0;
 
