@@ -10,8 +10,7 @@
  *
 */
 
-#ifndef FIFO_BUFFER_H
-#define FIFO_BUFFER_H
+#pragma once
 
 #include "cyclic_buffer.h"
 
@@ -155,5 +154,3 @@ protected:
 	threads_queue_t q_waiting;
 #endif // EFI_UNIT_TEST
 };
-
-#endif /* FIFO_BUFFER_H */
