@@ -5,21 +5,22 @@
 
 #define BENCH_TEST_BASE_ADDRESS 0x770000
 
-// todo: convert these commands into C++ enum and leverage enum2string code generator?
-// ECU output
-#define BENCH_TEST_EVENT_COUNTERS BENCH_TEST_BASE_ADDRESS
-// ECU output
-#define BENCH_TEST_RAW_ANALOG_1 (BENCH_TEST_BASE_ADDRESS + 1)
-// ECU input
-#define BENCH_TEST_IO_CONTROL (BENCH_TEST_BASE_ADDRESS + 2)
-// ECU output
-#define BENCH_TEST_BOARD_STATUS (BENCH_TEST_BASE_ADDRESS + 3)
-// ECU output
-#define BENCH_TEST_BUTTON_COUNTERS (BENCH_TEST_BASE_ADDRESS + 4)
-// ECU output
-#define BENCH_TEST_IO_META_INFO (BENCH_TEST_BASE_ADDRESS + 5)
-// ECU output
-#define BENCH_TEST_RAW_ANALOG_2 (BENCH_TEST_BASE_ADDRESS + 6)
+enum class bench_test_packet_ids_e : int32_t {
+	// ECU output
+	EVENT_COUNTERS = BENCH_TEST_BASE_ADDRESS,
+	// ECU output
+	RAW_ANALOG_1,
+	// ECU input
+	IO_CONTROL,
+	// ECU output
+	BOARD_STATUS,
+	// ECU output
+	BUTTON_COUNTERS,
+	// ECU output
+	IO_META_INFO,
+	// ECU output
+	RAW_ANALOG_2,
+};
 
 
 // TEST_CONTROL_MAGIC_WORD
