@@ -26,7 +26,11 @@ enum class bench_test_packet_ids_e : int32_t {
 // TEST_CONTROL_MAGIC_WORD
 
 #define CAN_BENCH_HEADER 0x66
-#define CAN_BENCH_GET_COUNT 0
-#define CAN_BENCH_GET_SET 1
-#define CAN_BENCH_GET_CLEAR 2
-#define CAN_BENCH_SET_ENGINE_TYPE 3
+
+enum class bench_test_io_control_e : int8_t {
+	CAN_BENCH_GET_COUNT,
+	CAN_BENCH_GET_SET,
+	CAN_BENCH_GET_CLEAR,
+	CAN_BENCH_SET_ENGINE_TYPE,
+	CAN_BENCH_EXECUTE_BENCH_TEST,
+};
