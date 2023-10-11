@@ -20,6 +20,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	IO_META_INFO,
 	// ECU output
 	RAW_ANALOG_2,
+	// ECU output
+	PIN_STATE,
 };
 
 
@@ -33,4 +35,5 @@ enum class bench_test_io_control_e : int8_t {
 	CAN_BENCH_GET_CLEAR,
 	CAN_BENCH_SET_ENGINE_TYPE,
 	CAN_BENCH_EXECUTE_BENCH_TEST,
+	CAN_BENCH_QUERY_PIN_STATE,
 };
