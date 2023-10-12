@@ -25,10 +25,10 @@ jobs:
         working-directory: .
         run: make -v
 
-      - name: Dir
-        working-directory: .
-        run: dir
-
       - name: Compile
         working-directory: .
         run: make
+
+      - name: Compile
+        working-directory: build
+        run: libfirmware_test.exe
