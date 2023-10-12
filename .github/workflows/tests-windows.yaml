@@ -7,6 +7,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
       - name: Set up MinGW
         uses: egor-tensin/setup-mingw@v2
         with:
@@ -19,10 +24,6 @@ jobs:
       - name: Print make version
         working-directory: .
         run: make -v
-
-      - name: Pwd
-        working-directory: .
-        run: pwd
 
       - name: Dir
         working-directory: .
