@@ -29,6 +29,10 @@ jobs:
         working-directory: .
         run: make
 
+      - name: Listing of build folder
+        working-directory: build
+        run: dir
+
       - name: Compile
         working-directory: build
-        run: libfirmware_test.exe
+        run: ./libfirmware_test.exe
