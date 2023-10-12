@@ -24,6 +24,9 @@ enum class bench_test_packet_ids_e : int32_t {
 	PIN_STATE,
 };
 
+enum class bench_test_magic_numbers_e : int32_t {
+    BENCH_HEADER = 0x66,
+};
 
 // TEST_CONTROL_MAGIC_WORD
 
