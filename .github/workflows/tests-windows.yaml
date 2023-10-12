@@ -20,6 +20,14 @@ jobs:
         working-directory: .
         run: make -v
 
+      - name: Pwd
+        working-directory: .
+        run: pwd
+
+      - name: Dir
+        working-directory: .
+        run: dir
+
       - name: Compile
         working-directory: .
         run: make
