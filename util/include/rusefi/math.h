@@ -7,8 +7,12 @@
 #include <cstddef>
 
 // absolute value
-int absI(int value);
-float absF(float value);
+constexpr int absI(int value) {
+                   	return value > 0 ? value : -value;
+                   }
+constexpr float absF(float value) {
+                       	return value > 0 ? value : -value;
+                       }
 
 // Min/max
 int maxI(int i1, int i2);

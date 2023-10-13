@@ -2,14 +2,6 @@
 
 #include <cstdint>
 
-float absF(float value) {
-	return value > 0 ? value : -value;
-}
-
-int absI(int value) {
-	return value >= 0 ? value : -value;
-}
-
 int maxI(int i1, int i2) {
 	return i1 > i2 ? i1 : i2;
 }
