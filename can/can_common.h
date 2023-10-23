@@ -3,6 +3,8 @@
 // we use ExtID but only 16 bits in comms protocol from ECU to GDI4
 #define GDI4_BASE_ADDRESS 0xBB20
 
+#define GDI4_MAGIC 0x67
+
 #define BENCH_TEST_BASE_ADDRESS 0x770000
 
 enum class bench_test_packet_ids_e : int32_t {
