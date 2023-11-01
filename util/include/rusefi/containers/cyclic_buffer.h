@@ -52,8 +52,8 @@ cyclic_buffer<T, maxSize>::cyclic_buffer() : cyclic_buffer(maxSize) {
 }
 
 template<typename T, size_t maxSize>
-cyclic_buffer<T, maxSize>::cyclic_buffer(int size) {
-	setSize(size);
+cyclic_buffer<T, maxSize>::cyclic_buffer(int p_size) {
+	setSize(p_size);
 }
 
 template<typename T, size_t maxSize>
@@ -83,9 +83,9 @@ bool cyclic_buffer<T, maxSize>::contains(T value) const {
 }
 
 template<typename T, size_t maxSize>
-void cyclic_buffer<T, maxSize>::setSize(size_t size) {
+void cyclic_buffer<T, maxSize>::setSize(size_t p_size) {
 	clear();
-	this->size = size < maxSize ? size : maxSize;
+	size = p_size < maxSize ? p_size : maxSize;
 }
 
 template<typename T, size_t maxSize>

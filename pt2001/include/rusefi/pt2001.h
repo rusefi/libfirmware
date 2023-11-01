@@ -34,8 +34,8 @@ public:
 	// Disable the PT2001 chip.
 	void shutdown();
 
-	void onError(McFault fault) {
-	    this->fault = fault;
+	void onError(McFault p_fault) {
+	    fault = p_fault;
 	}
 
 	// Re-read timing configuration and reconfigure the chip. This is safe to call while operating.
