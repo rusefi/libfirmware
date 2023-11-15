@@ -15,6 +15,7 @@ RUSEFI_LIB_CPP_TEST += \
 	$(RUSEFI_LIB)/util/test/test_fragments.cpp \
 	$(RUSEFI_LIB)/util/test/test_interpolation.cpp \
 	$(RUSEFI_LIB)/util/test/test_scaled.cpp \
+	$(RUSEFI_LIB)/util/test/test_manifest.cpp \
 	$(RUSEFI_LIB)/util/test/test_wraparound.cpp \
 	$(RUSEFI_LIB)/util/test/test_math.cpp \
 
