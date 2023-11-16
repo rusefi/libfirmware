@@ -44,6 +44,5 @@ public:
 	}
 
 private:
-	// Use not-quite-minimum value to avoid overflow
 	efitick_t m_lastReset;
 };
