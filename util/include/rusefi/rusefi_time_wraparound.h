@@ -1,3 +1,7 @@
+#pragma once
+
+#include <rusefi/rusefi_time_types.h>
+
 /**
  * Provide a 62-bit counter from a 32-bit counter source that wraps around.
  *
