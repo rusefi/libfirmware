@@ -422,7 +422,7 @@ bool Pt2001Base::restart() {
 	deselect();
 
 	if (getVbatt() < 8) {
-		// efiPrintf("GDI not Restarting until we see VBatt");
+		onError("GDI not Restarting until we see VBatt");
 		return false;
 	}
 
