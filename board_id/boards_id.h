@@ -1,5 +1,5 @@
 //
-// was generated automatically by Hellen Board-ID generation tool gen_board_ids_h.py 2023-10-25 23:24:49.299158
+// was generated automatically by Hellen Board-ID generation tool gen_board_ids_h.py 2024-01-01 13:21:14.662884
 //
 
 #pragma once
@@ -53,3 +53,6 @@
 #define BOARD_ID_ALPHA8CH_C			214
 #define BOARD_ID_UAEFI_A			215
 #define BOARD_ID_H112_MG1_B			300
+#define BOARD_ID_HD81_A			301
+#define BOARD_ID_UAEFI_B			302
+#define BOARD_ID_GDI4CHAN_A			303
