@@ -24,6 +24,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	RAW_ANALOG_2,
 	// ECU output
 	PIN_STATE,
+	// ECU output
+	AUX_DIGITAL_COUNTERS,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
