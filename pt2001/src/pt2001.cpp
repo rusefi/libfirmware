@@ -102,10 +102,10 @@ static uint16_t dacEquation(float current) {
 		DAC_VALUE = ((I*G_DA_DIFF * R_SENSEx) + V_DA_BIAS) /  V_DAC_LSB
 		V_DAC_LSB is the DAC resolution = 9.77mv
 		V_DA_BIAS = 250mV
-		G_DA_DIFF = Gain: 5.79, 8.68, [12.53], 19.25
+		G_DA_DIFF = Gain: 5.79, [8.68], 12.53, 19.25
 		R_SENSE = 10mOhm soldered on board
 	*/
-	return ((current * 12.53f * 10) + 250.0f) / 9.77f;
+	return ((current * 8.68f * 10) + 250.0f) / 9.77f;
 }
 
 void Pt2001Base::setTimings() {

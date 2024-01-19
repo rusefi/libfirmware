@@ -5,7 +5,7 @@
 * Note: The Thold_tot variable defines the current profile time out. The active STARTx pin is expected to toggle in is low state before this time out.
 
 * ### Initialization phase ###
-init0:      stgn gain12.6 sssc;                     * Set the gain of the opamp of the current measure block 1 
+init0:      stgn gain8.68 sssc;                     * Set the gain of the opamp of the current measure block 1 
             ldjr1 eoinj0;                           * Load the eoinj line label Code RAM address into the register jr1 
             ldjr2 idle0;                            * Load the idle line label Code RAM address into the register jr2
             cwef jr1 _start row1;                   * If the start signal goes low, go to eoinj phase       
@@ -101,7 +101,7 @@ eoinj0:     stos off off off;                       * Turn VBAT off, BOOST off, 
 * ### Channel 1 - uCore1 controls the injectors 3 and 4 ###
 
 * ### Initialization phase ###
-init1:      stgn gain12.6 sssc;                     * Set the gain of the opamp of the current measure block 1
+init1:      stgn gain8.68 sssc;                     * Set the gain of the opamp of the current measure block 1
             ldjr1 eoinj1;                           * Load the eoinj line label Code RAM address into the register jr1
             ldjr2 idle1;                            * Load the idle line label Code RAM address into the register jr2
             cwef jr1 _start row1;                   * If the start signal goes low, go to eoinj phase
