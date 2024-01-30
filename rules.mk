@@ -142,7 +142,7 @@ endif
 
 clean: CLEAN_RULE_HOOK
 	@echo Cleaning
-	-rm -fR .dep $(BUILDDIR) pch/pch.h.gch
+	-rm -fR .dep $(BUILDDIR)
 	@echo Done
 
 CLEAN_RULE_HOOK:
