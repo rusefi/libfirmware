@@ -7,9 +7,9 @@ efitimeus_t getTimeNowUs() {
 }
 
 efitimesec_t getTimeNowS() {
-	return getTimeNowUs() / 1000 / 1000;
+	return static_cast<efitimeus_t::value_type>(getTimeNowUs()) / 1000 / 1000;
 }
 
 efitick_t getTimeNowNt() {
-	return getTimeNowUs() * US_TO_NT_MULTIPLIER;
+	return (static_cast<efitimeus_t::value_type>(getTimeNowUs())) * US_TO_NT_MULTIPLIER;
 }

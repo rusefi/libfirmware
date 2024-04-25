@@ -5,6 +5,16 @@
 #include <cstdint>
 #include <sys/types.h>
 
+#include "tagged_numeric.h"
+
+enum class time_unit {
+ MICROSECOND,
+};
+
+template <typename arithmetic_value_type, time_unit> struct timestamp_tag_s {
+ using value_type = arithmetic_value_type;
+};
+
 /**
  * We use a signed type here so that subtraction result is a proper negative value.
  * A typical use-case negative result is when we do 'timeNow() - timeOfEvent' where timeOfEvent
@@ -24,7 +34,7 @@ using efitick_t = int64_t;
 /**
  * 64 bit time in microseconds (1/1_000_000 of a second), since boot
  */
-using efitimeus_t = int64_t;
+using efitimeus_t = tagged_numeric_t<timestamp_tag_s<int64_t, time_unit::MICROSECOND>>;;
 
 // time in seconds
 using efitimesec_t = time_t;
@@ -55,4 +65,7 @@ efitick_t getTimeNowNt();
 #define US_PER_SECOND_LL 1000000LL
 
 #define MS2US(MS_TIME) ((MS_TIME) * 1000)
-#define US2MS(US_TIME) ((US_TIME) / 1000)
+
+inline int US2MS(const efitimeus_t& timeus) {
+ return static_cast<efitimeus_t::value_type>(timeus) / 1000;
+}
