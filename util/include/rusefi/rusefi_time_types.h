@@ -34,7 +34,7 @@ using efitick_t = int64_t;
 /**
  * 64 bit time in microseconds (1/1_000_000 of a second), since boot
  */
-using efitimeus_t = tagged_numeric_t<timestamp_tag_s<int64_t, time_unit::MICROSECOND>>;;
+using efitimeus_t = tagged_numeric_t<timestamp_tag_s<int64_t, time_unit::MICROSECOND>>;
 
 // time in seconds
 using efitimesec_t = time_t;
