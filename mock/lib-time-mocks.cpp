@@ -3,15 +3,15 @@
 static int timeNowUs = 0;
 
 efitimeus_t getTimeNowUs() {
-	return timeNowUs;
+	return USOF(timeNowUs);
 }
 
 efitimesec_t getTimeNowS() {
-	return getTimeNowUs() / 1000 / 1000;
+	return COUNTOF(getTimeNowUs()) / 1000 / 1000;
 }
 
 efitick_t getTimeNowNt() {
-	return getTimeNowUs() * US_TO_NT_MULTIPLIER;
+	return COUNTOF(getTimeNowUs()) * US_TO_NT_MULTIPLIER;
 }
 
 void setTimeNowUs(int us) {
