@@ -13,3 +13,9 @@
 #define NT2USF(x) (((float)(x)) / US_TO_NT_MULTIPLIER)
 
 #define NT_PER_SECOND (US2NT(US_PER_SECOND_LL))
+
+#if EFI_UNIT_TEST
+// In unit tests, we can time travel...
+void setTimeNowUs(int us);
+void advanceTimeUs(int us);
+#endif
