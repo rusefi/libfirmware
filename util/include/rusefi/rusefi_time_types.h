@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <chrono>
 #include <cstdint>
 #include <sys/types.h>
 
@@ -21,10 +22,14 @@
  */
 using efitick_t = int64_t;
 
+using efidurus_t = std::chrono::duration<int64_t, std::micro>;
+static_assert(sizeof(efidurus_t) == 8);
+
 /**
  * 64 bit time in microseconds (1/1_000_000 of a second), since boot
  */
-using efitimeus_t = int64_t;
+using efitimeus_t = std::chrono::time_point<std::chrono::steady_clock, efidurus_t>;
+static_assert(sizeof(efitimeus_t) == 8);
 
 // time in seconds
 using efitimesec_t = time_t;
@@ -54,5 +59,34 @@ efitick_t getTimeNowNt();
 #define US_PER_SECOND_F 1000000.0
 #define US_PER_SECOND_LL 1000000LL
 
-#define MS2US(MS_TIME) ((MS_TIME) * 1000)
-#define US2MS(US_TIME) ((US_TIME) / 1000)
+template<typename ms_type>
+constexpr auto MS2US(ms_type ms_time) {
+  static_assert(
+    std::is_integral_v<ms_type> || std::is_floating_point_v<ms_type>,
+    "MS2US expects numeric type as parameter"
+  );
+  return ms_time * 1000;
+}
+
+template<typename ms_type>
+constexpr auto US2MS(ms_type timeus) {
+  static_assert(
+    std::is_integral_v<ms_type> || std::is_floating_point_v<ms_type>,
+    "US2MS expects numeric type or efitimeus_t as parameter"
+  );
+  return timeus / 1000;
+}
+
+constexpr efitimeus_t::rep US2MS(const efitimeus_t& timeus) {
+  return timeus.time_since_epoch().count() / 1000;
+}
+
+template<typename ms_type>
+constexpr efitimeus_t USOF(ms_type us) {
+    static_assert(std::is_integral_v<ms_type>, "US2MS expects integral type as parameter");
+    return efitimeus_t(efidurus_t(us));
+}
+
+constexpr efitimeus_t::rep COUNTOF(const efitimeus_t& us) {
+ return us.time_since_epoch().count();
+}
