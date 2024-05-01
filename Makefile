@@ -5,6 +5,8 @@
 
 PROJECT_DIR = .
 
+US_TO_NT_MULTIPLIER = 100
+
 # Imported source files and paths
 RUSEFI_LIB = .
 include $(RUSEFI_LIB)/util/util.mk
@@ -57,6 +59,7 @@ ifeq ($(USE_OPT),)
   #USE_OPT = $(RFLAGS) -O2 -fgnu89-inline -ggdb -fomit-frame-pointer -falign-functions=16 -std=gnu99 -Werror-implicit-function-declaration -Werror -Wno-error=pointer-sign -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers
   USE_OPT = -c -Wall -O0 -ggdb -g
   USE_OPT += -Werror=missing-field-initializers -Werror=shadow
+  USE_OPT += -D US_TO_NT_MULTIPLIER=$(US_TO_NT_MULTIPLIER)
 endif
 
 # C specific options here (added to USE_OPT).
