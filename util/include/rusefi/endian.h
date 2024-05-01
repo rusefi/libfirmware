@@ -48,7 +48,7 @@ class SwapEndian
 		}
 
 		constexpr SwapEndian(std::conditional_t<sizeof(T) == 2, T, IncompleteType> val) {
-			rep = SWAP_UINT32(val);
+			rep = SWAP_UINT16(val);
 		}
 	private:
 		T rep;
