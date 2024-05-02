@@ -1,3 +1,4 @@
+#pragma once
 
 #include <global.h>
 #include <rusefi/rusefi_time_types.h>
