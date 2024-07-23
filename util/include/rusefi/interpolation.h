@@ -6,7 +6,6 @@
 
 #include <cstdint>
 
-#include "isnan.h"
 #include "scaled_channel.h"
 
 namespace priv {
@@ -32,7 +31,7 @@ BinResult getBin(float value, const TBin (&bins)[TSize]) {
 	static_assert(TSize >= 2);
 
 	// Handle NaN
-	if (cisnan(value)) {
+	if (std::isnan(value)) {
 		return { 0, 0.0f };
 	}
 
