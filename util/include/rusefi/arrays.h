@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include "scaled_channel.h"
+#include "critical_error.h"
 
 /**
  * Copies an array from src to dest.  The lengths of the arrays must match.
@@ -52,7 +53,7 @@ template <typename T>
 constexpr void clear(T* obj) {
 #ifdef WE_HAVE_CRITICAL_ERROR_METHOD
   if (obj == nullptr) {
-    criticalError("clear nullptr");
+    efiCriticalError("clear nullptr");
     return;
   }
 #endif // WE_HAVE_CRITICAL_ERROR_METHOD
