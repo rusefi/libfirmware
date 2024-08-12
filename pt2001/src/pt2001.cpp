@@ -241,6 +241,7 @@ void Pt2001Base::downloadRam(int target) {
 		start_address = 0;
 		codeWidthRegAddr = 0x107;
 		RAM_ptr = PT2001_code_RAM1;
+		// todo: use efi::size?
 		size = sizeof(PT2001_code_RAM1) / 2;
 		break;
 
@@ -249,6 +250,7 @@ void Pt2001Base::downloadRam(int target) {
 		start_address = 0;
 		codeWidthRegAddr = 0x127;
 		RAM_ptr = PT2001_code_RAM2;
+		// todo: use efi::size?
 		size = sizeof(PT2001_code_RAM2) / 2;
 		break;
 
@@ -256,6 +258,7 @@ void Pt2001Base::downloadRam(int target) {
 		memory_area = 0x4;
 		start_address = 0;
 		RAM_ptr = PT2001_data_RAM;
+		// todo: use efi::size?
 		size = sizeof(PT2001_data_RAM) / 2;
 		break;
 // optional, both data_rams with 0x3, writes same code to both
