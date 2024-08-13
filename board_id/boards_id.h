@@ -1,5 +1,5 @@
 //
-// was generated automatically by Hellen Board-ID generation tool gen_board_ids_h.py 2024-04-23 18:56:26.611390
+// was generated automatically by Hellen Board-ID generation tool gen_board_ids_h.py 2024-08-12 22:36:58.154615
 //
 
 #pragma once
@@ -59,5 +59,7 @@
 #define BOARD_ID_ALPHAX_SILVER_A			304
 #define BOARD_ID_HD81_B			305
 #define BOARD_ID_154HYUNDAI_E			306
-// 307
+#define BOARD_ID_H112_MG1_C			307
 #define BOARD_ID_UAEFI121_A			308
+#define BOARD_ID_POLARIS_112_A			309
+#define BOARD_ID_UAEFI121_B			310
