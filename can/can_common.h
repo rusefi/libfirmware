@@ -17,7 +17,7 @@ enum class bench_test_packet_ids_e : int32_t {
 	// ECU output
 	BOARD_STATUS,
 	// ECU output
-	BUTTON_COUNTERS,
+	BUTTON_COUNTERS, // 0x770004
 	// ECU output
 	IO_META_INFO,
 	// ECU output
