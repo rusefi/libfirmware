@@ -122,6 +122,8 @@ protected:
 
 	// Print out an error message
 	virtual void onError(const char* why) = 0;
+    // useful for poorly designed boards or when short of IO
+	virtual bool errorOnUnexpectedFlag() = 0;
 
 	// Sleep for some number of milliseconds
 	virtual void sleepMs(size_t ms) = 0;

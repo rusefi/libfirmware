@@ -462,9 +462,11 @@ bool Pt2001Base::restart() {
 	// current configuration of REG_MAIN would toggle flag0 from LOW to HIGH
 	flag0after = readFlag0();
 	if (flag0before || !flag0after) {
-		onError(McFault::flag0);
-		shutdown();
-		return false;
+	    if (errorOnUnexpectedFlag()) {
+		    onError(McFault::flag0);
+		    shutdown();
+		    return false;
+        }
 	}
 
 	downloadRegister(REG_CH1);     // download channel 1 register configurations
