@@ -26,6 +26,8 @@ enum class McFault : uint8_t
     UnderVoltage7 = 7,
 };
 
+const char * mcFaultToString(McFault fault);
+
 class Pt2001Base {
 public:
 	// Reinitialize the PT2001 chip, returns true if successful

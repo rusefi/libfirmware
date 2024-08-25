@@ -411,6 +411,18 @@ void Pt2001Base::downloadRegister(int r_target) {
 // 	initMc33816IfNeeded();
 // }
 
+const char * mcFaultToString(McFault fault) {
+    switch (fault) {
+        case McFault::NoComm:
+            return "NoComm";
+        case McFault::UnderVoltageAfter:
+            return "UnderVoltageAfter";
+        default:
+            return "TODO";
+    }
+    return "TODO";
+}
+
 void Pt2001Base::shutdown() {
 	setDriveEN(false); // ensure HV is off
 	setResetB(false);  // turn off the chip
