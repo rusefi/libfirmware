@@ -40,12 +40,16 @@ public:
 	    fault = p_fault;
 	}
 
+private:
+    // method not public since does not acquire/release bus yet!
 	// Re-read timing configuration and reconfigure the chip. This is safe to call while operating.
 	void setTimings();
 
+    // method not public since does not acquire/release bus yet!
 	// Set the boost voltage target. This is safe to call while operating.
 	void setBoostVoltage(float volts);
 
+public:
     McFault fault = McFault::None;
     uint16_t status = 0;
     uint16_t status5 = 0;
