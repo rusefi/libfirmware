@@ -87,10 +87,10 @@ private:
 
 protected:
 	// The consuming app must implement these functions!
-	virtual void spiAcquireBus() = 0;
+	virtual void acquireBus() = 0;
 	virtual void select() = 0;
 	virtual void deselect() = 0;
-	virtual void spiReleaseBus() = 0;
+	virtual void releaseBus() = 0;
 	virtual uint16_t sendRecv(uint16_t tx) = 0;
 	// Send `count` number of 16 bit words from `data`
 	virtual void sendLarge(const uint16_t* data, size_t count) = 0;
