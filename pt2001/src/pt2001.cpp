@@ -415,8 +415,18 @@ const char * mcFaultToString(McFault fault) {
     switch (fault) {
         case McFault::NoComm:
             return "NoComm";
+        case McFault::NoFlash:
+            return "NoFlash";
         case McFault::UnderVoltageAfter:
             return "UnderVoltageAfter";
+        case McFault::flag0:
+            return "flag0";
+        case McFault::UnderVoltage5:
+            return "UnderVoltage5";
+        case McFault::Driven:
+            return "Driven";
+        case McFault::UnderVoltage7:
+            return "UnderVoltage7";
         default:
             return "TODO";
     }
