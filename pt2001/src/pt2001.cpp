@@ -459,6 +459,7 @@ bool Pt2001Base::restart() {
 	// Flag0 should be floating - pulldown means it should read low
 	flag0before = readFlag0();
 
+	spiAcquireBus();
 	setupSpi();
 
 	clearDriverStatus(); // Initial clear necessary
@@ -466,6 +467,7 @@ bool Pt2001Base::restart() {
 	if (checkUndervoltV5(status)) {
 		onError(McFault::UnderVoltage5);
 		shutdown();
+		spiReleaseBus();
 		return false;
 	}
 
@@ -473,6 +475,7 @@ bool Pt2001Base::restart() {
 	if (!validateChipId(chipId)) {
 		onError(McFault::NoComm);
 		shutdown();
+		spiReleaseBus();
 		return false;
 	}
 
@@ -487,6 +490,7 @@ bool Pt2001Base::restart() {
 	    if (errorOnUnexpectedFlag()) {
 		    onError(McFault::flag0);
 		    shutdown();
+		    spiReleaseBus();
 		    return false;
         }
 	}
@@ -507,6 +511,7 @@ bool Pt2001Base::restart() {
 	if (!checkFlash()) {
 		onError(McFault::NoFlash);
 		shutdown();
+		spiReleaseBus();
 		return false;
 	}
 
@@ -521,6 +526,7 @@ bool Pt2001Base::restart() {
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltage7);
 		shutdown();
+		spiReleaseBus();
 		return false;
 	}
 
@@ -531,6 +537,7 @@ bool Pt2001Base::restart() {
 	if (!checkDrivenEnabled(status)) {
 		onError(McFault::Driven);
 		shutdown();
+		spiReleaseBus();
 		return false;
 	}
 
@@ -538,8 +545,10 @@ bool Pt2001Base::restart() {
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltageAfter); // Likely DC-DC LS7 is dead!
 		shutdown();
+		spiReleaseBus();
 		return false;
 	}
 
+    spiReleaseBus();
 	return true;
 }
