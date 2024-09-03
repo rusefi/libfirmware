@@ -8,6 +8,7 @@
 
 #pragma once
 
+// 61440
 #define STATIC_BOARD_ID_BASE 0xF000
 
 #define STATIC_BOARD_ID_48WAY                (STATIC_BOARD_ID_BASE + 0)
