@@ -28,6 +28,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	AUX_DIGITAL_COUNTERS,
 	// ECU output
 	MANUAL_PIN_TEST,
+	// OpenBLT input 0x77000A
+	FW_WIPE_OUT,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
