@@ -46,7 +46,7 @@ int32_t gm_GetPressure() {
      * Sig1 occupies next 3 nibbles in LSB..MSB order
      * Signals are close, but not identical.
      * Sig0 shows about 197..198 at 1 Atm (open air) and 282 at 1000 KPa (9.86 Atm)
-     * Sig1 shows abour 202..203 at 1 Atm (open air) and 283 at 1000 KPa (9.86 Atm)
+     * Sig1 shows about 202..203 at 1 Atm (open air) and 283 at 1000 KPa (9.86 Atm)
      * So for 8.86 Atm delta there are:
      * 84..85 units for sig0
      * 80..81 units for sig1
