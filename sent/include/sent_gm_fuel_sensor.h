@@ -2,7 +2,7 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "sent_constants.h"
+#include "sent_decoder.h"
 
 class SentGmFuelSensor {
     public:
