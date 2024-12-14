@@ -11,8 +11,8 @@
 
 #include <stdint.h>
 
-/* Maximum slow shannel mailboxes, DO NOT CHANGE */
-#define SENT_SLOW_CHANNELS_MAX  16
+/* Maximum slow shannel mailboxes */
+#define SENT_SLOW_CHANNELS_MAX  32
 
 /* collect statistic */
 #define SENT_STATISTIC_COUNTERS	1
@@ -44,7 +44,8 @@ struct sent_channel_stat {
 	uint32_t RestartCnt;
 
 	/* Slow channel */
-	uint32_t sc;
+	uint32_t sc12;	//12-bit data, 8-bit message ID
+	uint32_t sc16;	//16-bit data, 4-bit message ID
 	uint32_t scCrcErr;
 
 	uint32_t getTotalError() {
@@ -75,8 +76,7 @@ private:
 	/* fast channel last received valid message */
 	uint32_t rxLast;
 
-	/* slow channel shift registers and flags */
-	uint16_t scMsgFlags;
+	/* slow channel shift registers */
 	uint32_t scShift2;	/* shift register for bit 2 from status nibble */
 	uint32_t scShift3;	/* shift register for bit 3 from status nibble */
 	uint32_t scCrcShift;	/* shift register for special order for CRC6 calculation */
@@ -106,6 +106,7 @@ public:
 	struct {
 		uint16_t data;
 		uint8_t id;
+		bool valid;
 	} scMsg[SENT_SLOW_CHANNELS_MAX];
 
 	/* Statistic counters */

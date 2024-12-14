@@ -72,7 +72,6 @@ void sent_channel::restart() {
 
 	/* reset slow channels */
 	SlowChannelDecoderReset();
-	scMsgFlags = 0;
 
 	#if SENT_STATISTIC_COUNTERS
 		statistic.ShortIntervalErr = 0;
@@ -81,7 +80,8 @@ void sent_channel::restart() {
 		statistic.CrcErrCnt = 0;
 		statistic.FrameCnt = 0;
 		statistic.PauseCnt = 0;
-		statistic.sc = 0;
+		statistic.sc12 = 0;
+		statistic.sc16 = 0;
 		statistic.scCrcErr = 0;
 		statistic.RestartCnt++;
 	#endif
@@ -366,7 +366,7 @@ int sent_channel::StoreSlowChannelValue(uint8_t id, uint16_t data)
 
 	/* Update already allocated messagebox? */
 	for (i = 0; i < SENT_SLOW_CHANNELS_MAX; i++) {
-		if ((scMsgFlags & BIT(i)) && (scMsg[i].id == id)) {
+		if ((scMsg[i].valid) && (scMsg[i].id == id)) {
 			scMsg[i].data = data;
 			return 0;
 		}
@@ -374,11 +374,11 @@ int sent_channel::StoreSlowChannelValue(uint8_t id, uint16_t data)
 
 	/* New message? Allocate messagebox */
 	for (i = 0; i < SENT_SLOW_CHANNELS_MAX; i++) {
-		if (!(scMsgFlags & BIT(i)))
+		if (scMsg[i].valid == false)
 		 {
 			scMsg[i].data = data;
 			scMsg[i].id = id;
-			scMsgFlags |= (1 << i);
+			scMsg[i].valid = true;
 			return 0;
 		}
 	}
@@ -392,7 +392,7 @@ int sent_channel::GetSlowChannelValue(uint8_t id)
 	size_t i;
 
 	for (i = 0; i < SENT_SLOW_CHANNELS_MAX; i++) {
-		if ((scMsgFlags & BIT(i)) && (scMsg[i].id == id)) {
+		if ((scMsg[i].valid) && (scMsg[i].id == id)) {
 			return scMsg[i].data;
 		}
 	}
@@ -432,26 +432,28 @@ int sent_channel::SlowChannelDecoder()
 
 		/* 0b11.1111.0xxx.xx0x.xxx0 ? */
 		if ((scShift3 & 0x3f821) == 0x3f000) {
-			uint8_t id;
+			/* C-flag: configuration bit is used to indicate 16 bit format */
+			bool sc16Bit = !!(scShift3 & (1 << 10));
 
 			uint8_t crc = (scShift2 >> 12) & 0x3f;
 			#if SENT_STATISTIC_COUNTERS
-				statistic.sc++;
+				if (sc16Bit) {
+					statistic.sc16++;
+				} else {
+					statistic.sc12++;
+				}
 			#endif
 			if (crc == crc6(scCrcShift)) {
-				/* C-flag: configuration bit is used to indicate 16 bit format */
-				bool sc16Bit = !!(scShift3 & (1 << 10));
 				if (!sc16Bit) {
 					/* 12 bit message, 8 bit ID */
-					id = ((scShift3 >> 1) & 0x0f) |
+					uint8_t id = ((scShift3 >> 1) & 0x0f) |
 						 ((scShift3 >> 2) & 0xf0);
 					uint16_t data = scShift2 & 0x0fff; /* 12 bit */
 
-					/* TODO: add crc check */
 					return StoreSlowChannelValue(id, data);
 				} else {
 					/* 16 bit message, 4 bit ID */
-					id = (scShift3 >> 6) & 0x0f;
+					uint8_t id = (scShift3 >> 6) & 0x0f;
 					uint16_t data = (scShift2 & 0x0fff) |
 						   (((scShift3 >> 1) & 0x0f) << 12);
 
@@ -473,6 +475,10 @@ void sent_channel::SlowChannelDecoderReset()
 	/* packet is incorrect, reset slow channel state machine */
 	scShift2 = 0;
 	scShift3 = 0;
+
+	for (size_t i = 0; i < SENT_SLOW_CHANNELS_MAX; i++) {
+		scMsg[i].valid = false;
+	}
 }
 
 /* This is correct for Si7215 */
