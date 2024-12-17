@@ -3,6 +3,10 @@
 // we use ExtID but only 16 bits in comms protocol from ECU to GDI4
 #define GDI4_BASE_ADDRESS 0xBB20
 
+// 0x10 IDs are used for input
+// 0x10 IDs are used for output
+#define GDI4_BASE_ADDRESS_OFFSET	0x20
+
 #define GDI4_MAGIC 0x67
 
 #define BENCH_TEST_BASE_ADDRESS 0x770000
