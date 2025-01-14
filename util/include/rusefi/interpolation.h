@@ -93,6 +93,7 @@ float interpolate2d(const float value, const TBin (&bin)[TSize], const TValue (&
 }
 
 // TS defines tables as [y_row_count x x_column_count] and we follow that weird Y, X order of arguments here
+// todo: add support for scaled_channel to match Map3D flexibility?
 template<typename VType, unsigned RNum, typename RType, unsigned X_ColumnNum, typename X_CType>
 float interpolate3d(const VType (&table)[RNum][X_ColumnNum],
                     const RType (&rowBins)[RNum], float yRowValue,
