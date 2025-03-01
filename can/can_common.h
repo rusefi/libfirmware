@@ -27,13 +27,15 @@ enum class bench_test_packet_ids_e : int32_t {
 	// ECU output
 	RAW_ANALOG_2,
 	// ECU output
-	PIN_STATE,
+	PIN_STATE, // 0x770007
 	// ECU output
 	AUX_DIGITAL_COUNTERS,
 	// ECU output
 	MANUAL_PIN_TEST,
 	// OpenBLT input 0x77000A
 	FW_WIPE_OUT,
+	 // ECU input 0x77000B
+	HW_QC_TESTER_PRESENT,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
