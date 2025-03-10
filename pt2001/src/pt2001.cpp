@@ -95,17 +95,17 @@ void Pt2001Base::writeDram(MC33816Mem addr, uint16_t data) {
 	deselect();
 }
 
-static uint16_t dacEquation(float current) {
+static uint16_t dacEquation(volatile float current) {
 	/*
 		Current, given in A
 		I = (DAC_VALUE * V_DAC_LSB - V_DA_BIAS)/(G_DA_DIFF * R_SENSEx)
 		DAC_VALUE = ((I*G_DA_DIFF * R_SENSEx) + V_DA_BIAS) /  V_DAC_LSB
 		V_DAC_LSB is the DAC resolution = 9.77mv
 		V_DA_BIAS = 250mV
-		G_DA_DIFF = Gain: 5.79, 8.68, [12.53], 19.25
+		G_DA_DIFF = Gain: 5.79, [8.68], 12.53, 19.25
 		R_SENSE = 10mOhm soldered on board
 	*/
-	return ((current * 12.53f * 10) + 250.0f) / 9.77f;
+	return ((current * 8.68f * 10) + 250.0f) / 9.77f;
 }
 
 void Pt2001Base::setTimings() {
@@ -144,7 +144,9 @@ void Pt2001Base::setBoostVoltage(float volts) {
 	}
 
 	// There's a 1/32 divider on the input, then the DAC's output is 9.77mV per LSB.  (1 / 32) / 0.00977 = 3.199 counts per volt.
-	uint16_t data = volts * 3.2;
+	// .. more accurately 3.25 * volts + 1.584
+	uint16_t data = (volts * 3.25f) + 1.584f;
+	//uint16_t data = volts * 3.2;
 	writeDram(MC33816Mem::Vboost_high, data+1);
 	writeDram(MC33816Mem::Vboost_low, data-1);
 	// Remember to strobe driven!!
@@ -487,10 +489,6 @@ bool Pt2001Base::restart() {
     sleepMs(5);
 
 	status = readDriverStatus();
-	status5 = readStatus(0x1A5);
-	status6 = readStatus(0x1A6);
-	status7 = readStatus(0x1A7);
-	status8 = readStatus(0x1A8);
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltage7);
 		shutdown();
@@ -513,6 +511,18 @@ bool Pt2001Base::restart() {
 		shutdown();
 		return false;
 	}
+
+	/*
+		select();
+		// Select Channel command, Common Page
+		send(0x7FE1);
+		send(0x0004);
+		// write (MSB=0) at data ram x9 (SCV_I_Hold), and 1 word
+		send((0x190 << 5) + 1);
+		send(0x20); // data
+
+		deselect();
+		*/
 
 	return true;
 }

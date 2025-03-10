@@ -46,10 +46,6 @@ public:
 
     McFault fault = McFault::None;
     uint16_t status = 0;
-    uint16_t status5 = 0;
-    uint16_t status6 = 0;
-    uint16_t status7 = 0;
-    uint16_t status8 = 0;
 
 	uint16_t readStatus(int reg);
 
