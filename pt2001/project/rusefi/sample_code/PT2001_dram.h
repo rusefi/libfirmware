@@ -1,7 +1,7 @@
 /*******************************************************************************
 * Example Code
 *
-* Copyright(C) 2023 NXP Semiconductors
+* Copyright(C) 2025 NXP Semiconductors
 * NXP Semiconductors Confidential and Proprietary
 *
 * Software that is described herein is for illustrative purposes only
@@ -58,6 +58,8 @@
 #define PT2001_D1_Thold_tot  0x07
 #define PT2001_D1_Tboost_max  0x08
 #define PT2001_D1_Tboost_min  0x09
+#define PT2001_D1_Tboost_inj12  0x20
+#define PT2001_D1_Tboost_inj34  0x21
 
 // DRAM 2 Parameter Addresses
 #define PT2001_D2_Vboost_high  0x40
