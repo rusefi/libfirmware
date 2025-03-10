@@ -95,7 +95,7 @@ void Pt2001Base::writeDram(MC33816Mem addr, uint16_t data) {
 	deselect();
 }
 
-static uint16_t dacEquation(float current) {
+static uint16_t dacEquation(volatile float current) {
 	/*
 		Current, given in A
 		I = (DAC_VALUE * V_DAC_LSB - V_DA_BIAS)/(G_DA_DIFF * R_SENSEx)
@@ -109,6 +109,21 @@ static uint16_t dacEquation(float current) {
 }
 
 void Pt2001Base::setTimings() {
+	// debug
+	// why is this not a uint8_t??
+	// or do we check the return is within range to prevent overflow
+	volatile uint16_t tmp;
+	tmp = dacEquation(10.0f);
+	tmp = dacEquation(12.0f);
+	tmp = dacEquation(13.0f);
+	tmp = dacEquation(15.0f);
+	tmp = dacEquation(18.0f);
+	tmp = dacEquation(20.0f);
+	tmp = dacEquation(24.0f);
+
+
+
+
 	setBoostVoltage(getBoostVoltage());
 
 	// Convert mA to DAC values
@@ -144,7 +159,9 @@ void Pt2001Base::setBoostVoltage(float volts) {
 	}
 
 	// There's a 1/32 divider on the input, then the DAC's output is 9.77mV per LSB.  (1 / 32) / 0.00977 = 3.199 counts per volt.
-	uint16_t data = volts * 3.2;
+	// .. more accurately 3.25 * volts + 1.584
+	uint16_t data = (volts * 3.25f) + 1.584f;
+	//uint16_t data = volts * 3.2;
 	writeDram(MC33816Mem::Vboost_high, data+1);
 	writeDram(MC33816Mem::Vboost_low, data-1);
 	// Remember to strobe driven!!
@@ -513,6 +530,18 @@ bool Pt2001Base::restart() {
 		shutdown();
 		return false;
 	}
+
+	/*
+		select();
+		// Select Channel command, Common Page
+		send(0x7FE1);
+		send(0x0004);
+		// write (MSB=0) at data ram x9 (SCV_I_Hold), and 1 word
+		send((0x190 << 5) + 1);
+		send(0x20); // data
+
+		deselect();
+		*/
 
 	return true;
 }

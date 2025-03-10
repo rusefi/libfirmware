@@ -1,7 +1,7 @@
 /*******************************************************************************
 * Example Code
 *
-* Copyright(C) 2023 NXP Semiconductors
+* Copyright(C) 2025 NXP Semiconductors
 * NXP Semiconductors Confidential and Proprietary
 *
 * Software that is described herein is for illustrative purposes only
@@ -48,8 +48,8 @@
 #ifndef PT2001_DATA_H_
 #define PT2001_DATA_H_
 
-extern unsigned short PT2001_code_RAM1[114];    // CODE RAM CH 1
-extern unsigned short PT2001_code_RAM2[43];    // CODE RAM CH 2
+extern unsigned short PT2001_code_RAM1[122];    // CODE RAM CH 1
+extern unsigned short PT2001_code_RAM2[40];    // CODE RAM CH 2
 extern unsigned short PT2001_data_RAM[128];    // DATA RAM
 extern unsigned short PT2001_main_config[29];  // main configurations
 extern unsigned short PT2001_ch1_config[19];   // CH 1 configurations
