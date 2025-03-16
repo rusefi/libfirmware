@@ -519,10 +519,6 @@ bool Pt2001Base::restart() {
     sleepMs(5);
 
 	status = readDriverStatus();
-	status5 = readStatus(0x1A5);
-	status6 = readStatus(0x1A6);
-	status7 = readStatus(0x1A7);
-	status8 = readStatus(0x1A8);
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltage7);
 		shutdown();
