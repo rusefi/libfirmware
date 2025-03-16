@@ -6,7 +6,6 @@
 
 #include <cstdint>
 
-#include "isnan.h"
 #include "scaled_channel.h"
 
 namespace priv {
@@ -32,7 +31,7 @@ BinResult getBin(float value, const TBin (&bins)[TSize]) {
 	static_assert(TSize >= 2);
 
 	// Handle NaN
-	if (cisnan(value)) {
+	if (std::isnan(value)) {
 		return { 0, 0.0f };
 	}
 
@@ -93,13 +92,15 @@ float interpolate2d(const float value, const TBin (&bin)[TSize], const TValue (&
 	return priv::linterp(low, high, frac);
 }
 
-template<typename VType, unsigned RNum, typename RType, unsigned CNum, typename CType>
-float interpolate3d(const VType (&table)[RNum][CNum],
-                    const RType (&rowBins)[RNum], float rowValue,
-                    const CType (&colBins)[CNum], float colValue)
+// TS defines tables as [y_row_count x x_column_count] and we follow that weird Y, X order of arguments here
+// todo: add support for scaled_channel to match Map3D flexibility?
+template<typename VType, unsigned RNum, typename RType, unsigned X_ColumnNum, typename X_CType>
+float interpolate3d(const VType (&table)[RNum][X_ColumnNum],
+                    const RType (&rowBins)[RNum], float yRowValue,
+                    const X_CType (&colBins)[X_ColumnNum], float xColValue)
 {
-    auto row = priv::getBin(rowValue, rowBins);
-    auto col = priv::getBin(colValue, colBins);
+    auto row = priv::getBin(yRowValue, rowBins);
+    auto col = priv::getBin(xColValue, colBins);
 
     // Orient the table such that (0, 0) is the bottom left corner,
     // then the following variable names will make sense
