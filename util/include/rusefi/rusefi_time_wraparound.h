@@ -2,6 +2,11 @@
 
 #include <rusefi/rusefi_time_types.h>
 
+// custom start value could be useful for testing
+#ifndef WRAP_AROUND_INITIAL_UPPER
+#define WRAP_AROUND_INITIAL_UPPER 0
+#endif
+
 /**
  * Provide a 62-bit counter from a 32-bit counter source that wraps around.
  *
@@ -29,5 +34,5 @@ struct WrapAround62 {
 	}
 
 private:
-	volatile uint32_t m_upper = 0;
+	volatile uint32_t m_upper = WRAP_AROUND_INITIAL_UPPER;
 };

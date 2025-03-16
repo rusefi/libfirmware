@@ -9,6 +9,8 @@
  *     return num / denom;
  * }
  *
+ * todo: how does this compare to std::optional?
+ *
  * @date April 18, 2020
  * @author Matthew Kennedy, (c) 2020
  */

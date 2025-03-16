@@ -3,6 +3,10 @@
 // we use ExtID but only 16 bits in comms protocol from ECU to GDI4
 #define GDI4_BASE_ADDRESS 0xBB20
 
+// 0x10 IDs are used for input
+// 0x10 IDs are used for output
+#define GDI4_BASE_ADDRESS_OFFSET	0x20
+
 #define GDI4_MAGIC 0x67
 
 #define BENCH_TEST_BASE_ADDRESS 0x770000
@@ -17,15 +21,21 @@ enum class bench_test_packet_ids_e : int32_t {
 	// ECU output
 	BOARD_STATUS,
 	// ECU output
-	BUTTON_COUNTERS,
+	BUTTON_COUNTERS, // 0x770004
 	// ECU output
 	IO_META_INFO,
 	// ECU output
 	RAW_ANALOG_2,
 	// ECU output
-	PIN_STATE,
+	PIN_STATE, // 0x770007
 	// ECU output
 	AUX_DIGITAL_COUNTERS,
+	// ECU output
+	MANUAL_PIN_TEST,
+	// OpenBLT input 0x77000A
+	FW_WIPE_OUT,
+	 // ECU input 0x77000B
+	HW_QC_TESTER_PRESENT,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
