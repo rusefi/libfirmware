@@ -100,7 +100,7 @@ hold_off0:  ldcd rst _ofs keep keep Thold_off c2;   * Load the length of the hol
 
 * ### End of injection phase ###
 eoinj0:     stos off off off;                       * Turn VBAT off, BOOST off, LS off
-            stf high b1;                            * set flag0 to high to release the DC-DC converter idle mode
+            stf high b1;                            * set flag1 to high to release the DC-DC converter idle mode
             jmpf jr2;                               * Jump back to idle phase
 
 * ### End of Channel 1 - uCore0 code ###            
