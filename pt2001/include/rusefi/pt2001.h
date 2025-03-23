@@ -53,6 +53,7 @@ public:
     McFault fault = McFault::None;
     uint16_t status = 0;
 
+    void periodicCallback();
 	uint16_t readStatus(int reg);
 
 private:

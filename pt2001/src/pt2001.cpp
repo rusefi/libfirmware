@@ -223,6 +223,10 @@ void Pt2001Base::enableFlash() {
 	deselect();
 }
 
+void Pt2001Base::periodicCallback() {
+    // todo: read status/diag via SPI
+}
+
 void Pt2001Base::downloadRam(int target) {
 	uint16_t memory_area = 0;         // memory area
 	uint16_t start_address = 0;      // start address
