@@ -26,6 +26,8 @@ enum class McFault : uint8_t
     UnderVoltage7 = 7,
 };
 
+const char * mcFaultToString(McFault fault);
+
 class Pt2001Base {
 public:
 	// Reinitialize the PT2001 chip, returns true if successful
@@ -38,15 +40,20 @@ public:
 	    fault = p_fault;
 	}
 
+private:
+    // method not public since does not acquire/release bus yet!
 	// Re-read timing configuration and reconfigure the chip. This is safe to call while operating.
 	void setTimings();
 
+    // method not public since does not acquire/release bus yet!
 	// Set the boost voltage target. This is safe to call while operating.
 	void setBoostVoltage(float volts);
 
+public:
     McFault fault = McFault::None;
     uint16_t status = 0;
 
+    void periodicCallback();
 	uint16_t readStatus(int reg);
 
 private:
@@ -77,8 +84,10 @@ private:
 
 protected:
 	// The consuming app must implement these functions!
+	virtual void acquireBus() = 0;
 	virtual void select() = 0;
 	virtual void deselect() = 0;
+	virtual void releaseBus() = 0;
 	virtual uint16_t sendRecv(uint16_t tx) = 0;
 	// Send `count` number of 16 bit words from `data`
 	virtual void sendLarge(const uint16_t* data, size_t count) = 0;
@@ -118,6 +127,8 @@ protected:
 
 	// Print out an error message
 	virtual void onError(const char* why) = 0;
+    // useful for poorly designed boards or when short of IO
+	virtual bool errorOnUnexpectedFlag() = 0;
 
 	// Sleep for some number of milliseconds
 	virtual void sleepMs(size_t ms) = 0;

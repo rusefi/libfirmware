@@ -144,9 +144,7 @@ void Pt2001Base::setBoostVoltage(float volts) {
 	}
 
 	// There's a 1/32 divider on the input, then the DAC's output is 9.77mV per LSB.  (1 / 32) / 0.00977 = 3.199 counts per volt.
-	// .. more accurately 3.25 * volts + 1.584
 	uint16_t data = (volts * 3.25f) + 1.584f;
-	//uint16_t data = volts * 3.2;
 	writeDram(MC33816Mem::Vboost_high, data+1);
 	writeDram(MC33816Mem::Vboost_low, data-1);
 	// Remember to strobe driven!!
@@ -225,6 +223,10 @@ void Pt2001Base::enableFlash() {
 	deselect();
 }
 
+void Pt2001Base::periodicCallback() {
+    // todo: read status/diag via SPI
+}
+
 void Pt2001Base::downloadRam(int target) {
 	uint16_t memory_area = 0;         // memory area
 	uint16_t start_address = 0;      // start address
@@ -243,6 +245,7 @@ void Pt2001Base::downloadRam(int target) {
 		start_address = 0;
 		codeWidthRegAddr = 0x107;
 		RAM_ptr = PT2001_code_RAM1;
+		// todo: use efi::size?
 		size = sizeof(PT2001_code_RAM1) / 2;
 		break;
 
@@ -251,6 +254,7 @@ void Pt2001Base::downloadRam(int target) {
 		start_address = 0;
 		codeWidthRegAddr = 0x127;
 		RAM_ptr = PT2001_code_RAM2;
+		// todo: use efi::size?
 		size = sizeof(PT2001_code_RAM2) / 2;
 		break;
 
@@ -258,6 +262,7 @@ void Pt2001Base::downloadRam(int target) {
 		memory_area = 0x4;
 		start_address = 0;
 		RAM_ptr = PT2001_data_RAM;
+		// todo: use efi::size?
 		size = sizeof(PT2001_data_RAM) / 2;
 		break;
 // optional, both data_rams with 0x3, writes same code to both
@@ -410,6 +415,28 @@ void Pt2001Base::downloadRegister(int r_target) {
 // 	initMc33816IfNeeded();
 // }
 
+const char * mcFaultToString(McFault fault) {
+    switch (fault) {
+        case McFault::NoComm:
+            return "NoComm";
+        case McFault::NoFlash:
+            return "NoFlash";
+        case McFault::UnderVoltageAfter:
+            return "UnderVoltageAfter";
+        case McFault::flag0:
+            return "flag0";
+        case McFault::UnderVoltage5:
+            return "UnderVoltage5";
+        case McFault::Driven:
+            return "Driven";
+        case McFault::UnderVoltage7:
+            return "UnderVoltage7";
+        default:
+            return "TODO";
+    }
+    return "TODO";
+}
+
 void Pt2001Base::shutdown() {
 	setDriveEN(false); // ensure HV is off
 	setResetB(false);  // turn off the chip
@@ -436,6 +463,7 @@ bool Pt2001Base::restart() {
 	// Flag0 should be floating - pulldown means it should read low
 	flag0before = readFlag0();
 
+	acquireBus();
 	setupSpi();
 
 	clearDriverStatus(); // Initial clear necessary
@@ -443,6 +471,7 @@ bool Pt2001Base::restart() {
 	if (checkUndervoltV5(status)) {
 		onError(McFault::UnderVoltage5);
 		shutdown();
+		releaseBus();
 		return false;
 	}
 
@@ -450,6 +479,7 @@ bool Pt2001Base::restart() {
 	if (!validateChipId(chipId)) {
 		onError(McFault::NoComm);
 		shutdown();
+		releaseBus();
 		return false;
 	}
 
@@ -461,9 +491,12 @@ bool Pt2001Base::restart() {
 	// current configuration of REG_MAIN would toggle flag0 from LOW to HIGH
 	flag0after = readFlag0();
 	if (flag0before || !flag0after) {
-		onError(McFault::flag0);
-		shutdown();
-		return false;
+	    if (errorOnUnexpectedFlag()) {
+		    onError(McFault::flag0);
+		    shutdown();
+		    releaseBus();
+		    return false;
+        }
 	}
 
 	downloadRegister(REG_CH1);     // download channel 1 register configurations
@@ -482,6 +515,7 @@ bool Pt2001Base::restart() {
 	if (!checkFlash()) {
 		onError(McFault::NoFlash);
 		shutdown();
+		releaseBus();
 		return false;
 	}
 
@@ -492,6 +526,7 @@ bool Pt2001Base::restart() {
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltage7);
 		shutdown();
+		releaseBus();
 		return false;
 	}
 
@@ -502,6 +537,7 @@ bool Pt2001Base::restart() {
 	if (!checkDrivenEnabled(status)) {
 		onError(McFault::Driven);
 		shutdown();
+		releaseBus();
 		return false;
 	}
 
@@ -509,20 +545,10 @@ bool Pt2001Base::restart() {
 	if (checkUndervoltVccP(status)) {
 		onError(McFault::UnderVoltageAfter); // Likely DC-DC LS7 is dead!
 		shutdown();
+		releaseBus();
 		return false;
 	}
 
-	/*
-		select();
-		// Select Channel command, Common Page
-		send(0x7FE1);
-		send(0x0004);
-		// write (MSB=0) at data ram x9 (SCV_I_Hold), and 1 word
-		send((0x190 << 5) + 1);
-		send(0x20); // data
-
-		deselect();
-		*/
-
+    releaseBus();
 	return true;
 }
