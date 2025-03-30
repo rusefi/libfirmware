@@ -6,27 +6,24 @@ init0:      stgn gain5.8 ossc;                          * Set the gain of the op
             load Isense4_low dac_ossc _ofs;             * Load Isense4_high current threshold in DAC 4L
             load Isense4_high dac4h4n _ofs;             * Load Isense4_high current threshold in DAC 4H
             stdm null;                                  * Set the boost voltage DAC access mode
-            cwer dcdc_idle _f0 row1;                    * Wait table entry for Vboost under Vboost_low threshold condition
+            cwer dcdc_idle _f1 row1;                    * Wait table entry for flag1 going low
             cwer dcdc_on _vb row2;                      * Wait table entry for Vboost under Vboost_low threshold condition
             cwer dcdc_off vb row3;                      * Wait table entry for Vboost over Vboost_high threshold condition
 
 * ### Asynchronous phase ###  
 dcdc_on:    load Vboost_high dac4h4n _ofs;              * Load the upper Vboost threshold in vboost_dac register
-            stf high b1;
             stdcctl async;                              * Enable asynchronous mode
             wait row13;                                 * Wait for one of the previously defined conditions
 
 * ### Synchronous phase ### 
 dcdc_off:   load Vboost_low dac4h4n _ofs;               * Load the upper Vboost threshold in vboost_dac register
-            stf low b1;
             stdcctl sync;                               * Enable synchronous mode
             wait row12;                                 * Wait for one of the previously defined conditions
             
 * ### Idle phase ### 
 dcdc_idle:  stdcctl sync;                               * Enable synchronous mode
-            stf low b1;
-            stf high b1;
-            jocr dcdc_idle _f0;                         * jump to previous line while flag 0 is low
+            stos keep off keep;
+            jocr dcdc_idle _f1;                         * jump to previous line while flag 0 is low
             jmpr dcdc_on;                               * force the DC-DC converter on when flag 0 goes high
 
 * ### End of Channel 2 - uCore0 code ###
