@@ -18,6 +18,8 @@ enum class MC33816Mem {
     Thold_tot = PT2001_D1_Thold_tot,
     Tboost_min = PT2001_D1_Tboost_min,
     Tboost_max = PT2001_D1_Tboost_max,
+    Tboost_inj12 = PT2001_D1_Tboost_inj12,
+    Tboost_inj34 = PT2001_D1_Tboost_inj34,
     // see dram2.def values, base 64 for channel 2
     Vboost_high = PT2001_D2_Vboost_high,
     Vboost_low = PT2001_D2_Vboost_low,
