@@ -549,6 +549,8 @@ bool Pt2001Base::restart() {
 		return false;
 	}
 
+	onError(McFault::None);
+
     releaseBus();
 	return true;
 }
