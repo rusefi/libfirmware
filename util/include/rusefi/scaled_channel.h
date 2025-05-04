@@ -34,9 +34,6 @@ public:
 
 	// Scale the float in to our scaled channel
 	constexpr scaled_channel(std::conditional_t<mul != 1 || div != 1, float, IncompleteType> val) {
-		// If there are scale factors, it must NOT be a float. Why would you scale a float?
-		static_assert(std::is_integral_v<T>);
-
 		m_value = std::roundf(val * float(mul) / div);
 	}
 
