@@ -10,6 +10,7 @@
 #define GDI4_MAGIC 0x67
 
 #define GDI4_CAN_SET_TAG 0x78
+#define GDI4_CAN_SET_DLC 7
 
 #define BENCH_TEST_BASE_ADDRESS 0x770000
 
