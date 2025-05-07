@@ -9,6 +9,8 @@
 
 #define GDI4_MAGIC 0x67
 
+#define GDI4_CAN_SET_TAG 0x78
+
 #define BENCH_TEST_BASE_ADDRESS 0x770000
 
 enum class bench_test_packet_ids_e : int32_t {
