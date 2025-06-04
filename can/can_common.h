@@ -19,8 +19,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	EVENT_COUNTERS = BENCH_TEST_BASE_ADDRESS,
 	// ECU output
 	RAW_ANALOG_1,
-	// ECU input
-	IO_CONTROL,
+	// ECU input special bench quality control mode, not to be confused with ECU_CAN_BUS_USER_CONTROL
+	HW_QC_IO_CONTROL,
 	// ECU output
 	BOARD_STATUS,
 	// ECU output
@@ -40,7 +40,7 @@ enum class bench_test_packet_ids_e : int32_t {
 	// ECU input 0x77000B
 	HW_QC_TESTER_PRESENT,
 	// ECU input 0x77000C - user actions to control ECU
-	ECU_CAN_BUS_CONTROL,
+	ECU_CAN_BUS_USER_CONTROL,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
