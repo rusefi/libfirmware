@@ -37,8 +37,10 @@ enum class bench_test_packet_ids_e : int32_t {
 	MANUAL_PIN_TEST,
 	// OpenBLT input 0x77000A
 	FW_WIPE_OUT,
-	 // ECU input 0x77000B
+	// ECU input 0x77000B
 	HW_QC_TESTER_PRESENT,
+	// ECU input 0x77000C - user actions to control ECU
+	ECU_CAN_BUS_CONTROL,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
