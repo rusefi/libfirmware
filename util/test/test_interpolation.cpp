@@ -120,7 +120,7 @@ TEST_F(Test2dTableMassive, t)
 	{ \
 		auto ___temp___ = actual; \
 		EXPECT_EQ(___temp___.Idx, expectedIdx); \
-		EXPECT_NEAR(___temp___.Frac, expectedFrac, expectedFrac / 1e4); \
+		EXPECT_NEAR(___temp___.Frac, expectedFrac, abs(expectedFrac / 1e4)); \
 	}
 
 // Test with small bins: only two values
