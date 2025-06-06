@@ -66,6 +66,74 @@ BinResult getBin(float value, const TBin (&bins)[TSize]) {
 	return { idx, fraction };
 }
 
+/**
+ * @brief Finds the location of a closest value in the bin array.
+ *
+ * @param value The value to find in the bins.
+ * @return A result containing the index of the closest to bin value,
+ * and how far from (idx) to (idx + 1) or (idx - 1) the value is located.
+ * If value is outside of bin - {0, <-1.0} or {Tsize - 1, >+1.0} is returned
+ */
+template<class TBin, int TSize>
+struct BinResult getClosestBin(float value, const TBin (&bins)[TSize]) {
+	// Enforce numeric only (int, float, uintx_t, etc)
+	static_assert(std::is_arithmetic_v<TBin>, "Table bins must be an arithmetic type");
+
+	// Enforce that there are enough bins to make sense (what does one bin even mean?)
+	static_assert(TSize >= 2);
+
+	// Handle NaN
+	if (std::isnan(value)) {
+		return { 0, -1.0f };
+	}
+
+	const size_t lastIdx = TSize - 1;
+	size_t idx = 0;
+	float closest;
+	float step;
+
+	if (value <= bins[0]) {
+		// Handle off-scale low
+		// virtual bins[-1] located at the same distance to the left from bins[0], as bins[1] from bins[0]
+		step = bins[1] - bins[0];
+		idx = 0;
+	} else if (value >= bins[lastIdx]) {
+		// Handle off-scale high
+		// virtual bins[lastIdx + 1] located at the same distance to the right from bins[lastIdx], as bins[lastIdx - 1] from bins[lastIdx]
+		step = bins[lastIdx] - bins[lastIdx - 1];
+		idx = lastIdx;
+	} else {
+		// Find the closest bin. 50/50 divide distance between bins
+		// Linear search for now, maybe binary search in future
+		// after collecting real perf data
+		for (idx = 0; idx < lastIdx - 1; idx++) {
+			// ( -0.5, 05 ]
+			// if (bins[idx] + bins[idx + 1] / 2 >= value) {
+			if (bins[idx] + bins[idx + 1] >= 2 * value) {
+				break;
+			}
+		}
+
+		step = bins[idx + 1] - bins[idx];
+	}
+
+	if (step <= 0) {
+		// bins are not ascending or two bins are equal
+		return { idx, 1.0f };
+	}
+
+	closest = bins[idx];
+
+	// Compute how far from the closest bin we are:
+	// 0.0f = rigft in the bin
+	// -0.5f = half way to previous bin, 0.5f = half way to next bin
+	// <= -1.0f = to far below zero bin
+	// >=  1.0f = to far above last bin
+	float distance = (value - closest) / step;
+
+	return { idx, distance };
+}
+
 template<class TBin, int TSize, int TMult, int TDiv>
 BinResult getBin(float value, const scaled_channel<TBin, TMult, TDiv> (&bins)[TSize]) {
 	return getBin(value * (float(TMult) / TDiv), *reinterpret_cast<const TBin (*)[TSize]>(&bins));

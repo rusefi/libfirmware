@@ -120,7 +120,7 @@ TEST_F(Test2dTableMassive, t)
 	{ \
 		auto ___temp___ = actual; \
 		EXPECT_EQ(___temp___.Idx, expectedIdx); \
-		EXPECT_NEAR(___temp___.Frac, expectedFrac, expectedFrac / 1e4); \
+		EXPECT_NEAR(___temp___.Frac, expectedFrac, abs(expectedFrac / 1e4)); \
 	}
 
 // Test with small bins: only two values
@@ -195,3 +195,24 @@ TEST(Util_Interpolation, GetBinBigRightMiddle)
     EXPECT_BINRESULT(priv::getBin(25.0f, bigBins), 1, 0.5f);
 }
 
+// Test getClosestBin
+static const float rpmBins[14] = {800, 1300, 1800, 2200, 2700, 3200, 3700, 4100, 4600, 5100, 5600, 6000, 6500, 7000};
+
+TEST(Util_Interpolation, GetClosestBin)
+{
+	// Outside bins
+    EXPECT_BINRESULT(priv::getClosestBin(0, rpmBins), 0, -1.6f);
+    EXPECT_BINRESULT(priv::getClosestBin(10000, rpmBins), 13, 6.0f);
+
+    // first and last
+    EXPECT_BINRESULT(priv::getClosestBin(800, rpmBins), 0, 0.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(7000, rpmBins), 13, 0.0f);
+
+    // middle
+    EXPECT_BINRESULT(priv::getClosestBin(1050, rpmBins), 0, 0.5f);
+    EXPECT_BINRESULT(priv::getClosestBin(1550, rpmBins), 1, 0.5f);
+
+    // on edge
+    EXPECT_BINRESULT(priv::getClosestBin(300, rpmBins), 0, -1.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(7500, rpmBins), 13, 1.0f);
+}
