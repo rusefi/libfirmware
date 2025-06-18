@@ -2,7 +2,6 @@
 #include <rusefi/rusefi_time_types.h>
 #include <rusefi/rusefi_time_wraparound.h>
 
-
 TEST(util, WrapAround62) {
 	// Random test
 	{
