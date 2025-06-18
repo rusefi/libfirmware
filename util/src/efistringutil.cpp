@@ -1,8 +1,8 @@
 #include <cstring>
 #include <cstdint>
-#include <math.h>
+#include <cmath>
 #include <rusefi/efistringutil.h>
-#include <rusefi/math.h>
+#include <rusefi/rusefi_math.h>
 
 uint32_t efiStrlen(const char *param) {
 	const char *s;
@@ -24,7 +24,7 @@ int indexOf(const char *string, char ch) {
 }
 
 // string to integer
-int atoi(const char *string) {
+int atoi(const char *string) noexcept {
 	int len = strlen(string);
 	if (len == 0) {
 		return -ATOI_ERROR_CODE;
@@ -124,3 +124,4 @@ static char todofixthismesswithcopy[ATOFF_BUFFER_SIZE];
 	}
 	return integerPart + decimal / divider;
 }
+

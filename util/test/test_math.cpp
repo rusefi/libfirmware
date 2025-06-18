@@ -1,7 +1,7 @@
-#include <rusefi/math.h>
+#include <rusefi/rusefi_math.h>
 
 #include <gtest/gtest.h>
-#include <math.h>
+#include <cmath>
 
 TEST(Util_Math, ExpTaylor)
 {

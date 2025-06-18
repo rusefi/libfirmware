@@ -7,7 +7,7 @@
 
 #include <rusefi/fragments.h>
 
-#include <rusefi/math.h>
+#include <rusefi/rusefi_math.h>
 #include <cstring>
 
 size_t copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t size) {

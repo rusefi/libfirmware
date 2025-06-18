@@ -2,6 +2,7 @@
 #include <rusefi/rusefi_time_types.h>
 #include <rusefi/rusefi_time_wraparound.h>
 
+
 TEST(util, WrapAround62) {
 	// Random test
 	{
@@ -67,3 +68,4 @@ TEST(util, WrapAround62) {
 		EXPECT_EQ(t.update(0x03453455), 0x003453455LL);
 	}
 }
+
