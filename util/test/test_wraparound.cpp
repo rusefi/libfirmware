@@ -67,3 +67,4 @@ TEST(util, WrapAround62) {
 		EXPECT_EQ(t.update(0x03453455), 0x003453455LL);
 	}
 }
+

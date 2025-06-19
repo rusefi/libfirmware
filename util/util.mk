@@ -5,7 +5,7 @@ RUSEFI_LIB_CPP += \
 	$(RUSEFI_LIB)/util/src/crc.cpp \
 	$(RUSEFI_LIB)/util/src/efistringutil.cpp \
 	$(RUSEFI_LIB)/util/src/fragments.cpp \
-	$(RUSEFI_LIB)/util/src/math.cpp \
+	$(RUSEFI_LIB)/util/src/rusefi_math.cpp \
 
 RUSEFI_LIB_CPP_TEST += \
 	$(RUSEFI_LIB)/util/test/test_arrays.cpp \

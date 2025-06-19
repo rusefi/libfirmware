@@ -1,7 +1,7 @@
 #include <rusefi/scaled_channel.h>
 
 #include <gtest/gtest.h>
-#include <math.h>
+#include <cmath>
 
 TEST(Util_Scaled, float_equals) {
 

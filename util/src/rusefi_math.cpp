@@ -1,4 +1,4 @@
-#include <rusefi/math.h>
+#include <rusefi/rusefi_math.h>
 
 #include <cstdint>
 
