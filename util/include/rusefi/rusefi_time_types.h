@@ -3,7 +3,6 @@
 #pragma once
 
 #include <cstdint>
-#include <sys/types.h>
 
 /**
  * We use a signed type here so that subtraction result is a proper negative value.
@@ -51,9 +50,8 @@ efitick_t getTimeNowNt();
 
 #define MS_PER_SECOND 1000
 #define US_PER_SECOND 1000000
-// note lack of 'f' suffix in constant definition. We rely on consumers to have '-fsingle-precision-constant' gcc option which is not ideal
 // todo: maybe grep .list file to assert lack of double operations? See https://github.com/rusefi/rusefi/commit/5e6d916b31a9dab1ac488b7194728e0d0c68fa26
-#define US_PER_SECOND_F 1000000.0
+#define US_PER_SECOND_F 1000000.0f
 #define US_PER_SECOND_LL 1000000LL
 
 #define MS2US(MS_TIME) ((MS_TIME) * 1000)
