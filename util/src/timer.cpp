@@ -39,10 +39,10 @@ bool Timer::hasElapsedUs(float const microseconds) const {
 
 	if (microseconds >= max_32_bit_fit_float) {
 		auto const ntDouble{ static_cast<double>(microseconds) * US_TO_NT_MULTIPLIER };
-		return delta >= static_cast<efitick_t>(ntDouble);
+		return delta > static_cast<efitick_t>(ntDouble);
 	}
 
-	return static_cast<uint32_t>(delta) >= static_cast<uint32_t>(USF2NT(microseconds));
+	return static_cast<uint32_t>(delta) > static_cast<uint32_t>(USF2NT(microseconds));
 }
 
 float Timer::getElapsedSeconds() const {
