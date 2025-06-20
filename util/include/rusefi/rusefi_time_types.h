@@ -3,6 +3,7 @@
 #pragma once
 
 #include <cstdint>
+#include <bits/types/time_t.h>
 
 /**
  * We use a signed type here so that subtraction result is a proper negative value.
