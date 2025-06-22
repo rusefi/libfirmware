@@ -74,7 +74,10 @@ struct expected {
 		
 		// If both are invalid, they are equal
 		if (!Valid && !other.Valid) {
-			return true;
+			if (Code == other.Code) {
+				return true;
+			}
+			return false;
 		}
 
 		// Both are guaranteed valid - simply compare values
