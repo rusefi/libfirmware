@@ -41,6 +41,10 @@ enum class bench_test_packet_ids_e : int32_t {
 	HW_QC_TESTER_PRESENT,
 	// ECU input 0x77000C - user actions to control ECU
 	ECU_CAN_BUS_USER_CONTROL,
+	// ECU output 0x77000D
+	ECU_CONFIG_BROADCAST,
+	// ECU input 0x77000E - user actions to change ECU settings
+	ECU_CAN_BUS_SETTINGS_CONTROL,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
