@@ -45,6 +45,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	ECU_CONFIG_BROADCAST,
 	// ECU input 0x77000E - user actions to change ECU settings
 	ECU_CAN_BUS_SETTINGS_CONTROL,
+	// ECU input 0x77000F - dash alive status
+	DASH_ALIVE,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
