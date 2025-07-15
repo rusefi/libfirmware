@@ -21,7 +21,6 @@
     <MicroCodeFile channel="2" type="hex" date="133028335145068598">bin\ch2.hex</MicroCodeFile>
     <DPramFile channel="1">Registers\dram1.hex</DPramFile>
     <DPramFile channel="2">Registers\dram2.hex</DPramFile>
-    <LabelFile>labels.xml</LabelFile>
     <ActuatorFile>Actuator\inj1.xml</ActuatorFile>
     <ActuatorFile>Actuator\inj2.xml</ActuatorFile>
     <ActuatorFile>Actuator\inj3.xml</ActuatorFile>
