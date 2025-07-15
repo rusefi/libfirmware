@@ -51,6 +51,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	ECU_GET_CALIBRATION,
 	// ECU input 0x770011
 	ECU_SET_CALIBRATION,
+	// ECU input 0x770012
+	ECU_REQ_CALIBRATION,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
