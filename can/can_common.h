@@ -47,6 +47,10 @@ enum class bench_test_packet_ids_e : int32_t {
 	ECU_CAN_BUS_SETTINGS_CONTROL,
 	// ECU input 0x77000F - dash alive status
 	DASH_ALIVE,
+	// ECU output 0x770010
+	ECU_GET_CALIBRATION,
+	// ECU input 0x770011
+	ECU_SET_CALIBRATION,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
