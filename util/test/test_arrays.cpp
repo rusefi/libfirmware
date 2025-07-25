@@ -38,7 +38,7 @@ TEST(Util_Arrays, Size) {
 	uint8_t arr2[17];
 	scaled_channel<uint16_t, 3, 1> arr3[21];
 
-	ASSERT_EQ(2,  efi::size(arr1));
-	ASSERT_EQ(17, efi::size(arr2));
-	ASSERT_EQ(21, efi::size(arr3));
+	ASSERT_EQ(2u,  efi::size(arr1));
+	ASSERT_EQ(17u, efi::size(arr2));
+	ASSERT_EQ(21u, efi::size(arr3));
 }
