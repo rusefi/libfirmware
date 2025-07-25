@@ -13,14 +13,14 @@ TEST(Util_CRC, crc) {
 
 	uint32_t c = crc32(A, 1);
 	printf("crc32(A)=%x\r\n", c);
-	EXPECT_EQ(0xd3d99e8b, c);
+	EXPECT_EQ(0xd3d99e8bu, c);
 
 	const char * line = "AbcDEFGF";
 	c = crc32(line, 8);
 	printf("crc32(line)=%x\r\n", c);
-	EXPECT_EQ(0x4775a7b1, c);
+	EXPECT_EQ(0x4775a7b1u, c);
 
 	c = crc32(line, 1);
 	c = crc32inc(line + 1, c, 8 - 1);
-	EXPECT_EQ(0x4775a7b1, c);
+	EXPECT_EQ(0x4775a7b1u, c);
 }

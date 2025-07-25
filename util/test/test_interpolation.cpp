@@ -128,32 +128,32 @@ static const float smallBins[] = { 10, 20 };
 
 TEST(Util_Interpolation, GetBinSmallOffScaleLeft)
 {
-    EXPECT_BINRESULT(priv::getBin(5, smallBins), 0, 0);
+    EXPECT_BINRESULT(priv::getBin(5, smallBins), 0u, 0);
 }
 
 TEST(Util_Interpolation, GetBinSmallOffScaleRight)
 {
-    EXPECT_BINRESULT(priv::getBin(25, smallBins), 0, 1);
+    EXPECT_BINRESULT(priv::getBin(25, smallBins), 0u, 1);
 }
 
 TEST(Util_Interpolation, GetBinSmallEdgeLeft)
 {
-    EXPECT_BINRESULT(priv::getBin(10, smallBins), 0, 0);
+    EXPECT_BINRESULT(priv::getBin(10, smallBins), 0u, 0);
 }
 
 TEST(Util_Interpolation, GetBinSmallEdgeRight)
 {
-    EXPECT_BINRESULT(priv::getBin(10, smallBins), 0, 0);
+    EXPECT_BINRESULT(priv::getBin(10, smallBins), 0u, 0);
 }
 
 TEST(Util_Interpolation, GetBinSmallMiddle)
 {
-    EXPECT_BINRESULT(priv::getBin(15, smallBins), 0, 0.5f);
+    EXPECT_BINRESULT(priv::getBin(15, smallBins), 0u, 0.5f);
 }
 
 TEST(Util_Interpolation, GetBinSmallNanInput)
 {
-	EXPECT_BINRESULT(priv::getBin(NAN, smallBins), 0, 0);
+	EXPECT_BINRESULT(priv::getBin(NAN, smallBins), 0u, 0);
 }
 
 // Test with medium bins, 3 items
@@ -161,38 +161,38 @@ static const float bigBins[] = { 10, 20, 30 };
 
 TEST(Util_Interpolation, GetBinBigOffScaleLow)
 {
-    EXPECT_BINRESULT(priv::getBin(5, bigBins), 0, 0);
+    EXPECT_BINRESULT(priv::getBin(5, bigBins), 0u, 0);
 }
 
 TEST(Util_Interpolation, GetBinBigOffScaleHigh)
 {
-    EXPECT_BINRESULT(priv::getBin(35, bigBins), 1, 1.0f);
+    EXPECT_BINRESULT(priv::getBin(35, bigBins), 1u, 1.0f);
 }
 
 
 TEST(Util_Interpolation, GetBinBigNearMiddleLow)
 {
-    EXPECT_BINRESULT(priv::getBin(19.99f, bigBins), 0, 0.999f);
+    EXPECT_BINRESULT(priv::getBin(19.99f, bigBins), 0u, 0.999f);
 }
 
 TEST(Util_Interpolation, GetBinBigNearMiddleExact)
 {
-    EXPECT_BINRESULT(priv::getBin(20.0f, bigBins), 1, 0);
+    EXPECT_BINRESULT(priv::getBin(20.0f, bigBins), 1u, 0);
 }
 
 TEST(Util_Interpolation, GetBinBigNearMiddleHigh)
 {
-    EXPECT_BINRESULT(priv::getBin(20.01f, bigBins), 1, 0.001f);
+    EXPECT_BINRESULT(priv::getBin(20.01f, bigBins), 1u, 0.001f);
 }
 
 TEST(Util_Interpolation, GetBinBigLeftMiddle)
 {
-    EXPECT_BINRESULT(priv::getBin(15.0f, bigBins), 0, 0.5f);
+    EXPECT_BINRESULT(priv::getBin(15.0f, bigBins), 0u, 0.5f);
 }
 
 TEST(Util_Interpolation, GetBinBigRightMiddle)
 {
-    EXPECT_BINRESULT(priv::getBin(25.0f, bigBins), 1, 0.5f);
+    EXPECT_BINRESULT(priv::getBin(25.0f, bigBins), 1u, 0.5f);
 }
 
 // Test getClosestBin
@@ -201,18 +201,18 @@ static const float rpmBins[14] = {800, 1300, 1800, 2200, 2700, 3200, 3700, 4100,
 TEST(Util_Interpolation, GetClosestBin)
 {
 	// Outside bins
-    EXPECT_BINRESULT(priv::getClosestBin(0, rpmBins), 0, -1.6f);
-    EXPECT_BINRESULT(priv::getClosestBin(10000, rpmBins), 13, 6.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(0, rpmBins), 0u, -1.6f);
+    EXPECT_BINRESULT(priv::getClosestBin(10000, rpmBins), 13u, 6.0f);
 
     // first and last
-    EXPECT_BINRESULT(priv::getClosestBin(800, rpmBins), 0, 0.0f);
-    EXPECT_BINRESULT(priv::getClosestBin(7000, rpmBins), 13, 0.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(800, rpmBins), 0u, 0.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(7000, rpmBins), 13u, 0.0f);
 
     // middle
-    EXPECT_BINRESULT(priv::getClosestBin(1050, rpmBins), 0, 0.5f);
-    EXPECT_BINRESULT(priv::getClosestBin(1550, rpmBins), 1, 0.5f);
+    EXPECT_BINRESULT(priv::getClosestBin(1050, rpmBins), 0u, 0.5f);
+    EXPECT_BINRESULT(priv::getClosestBin(1550, rpmBins), 1u, 0.5f);
 
     // on edge
-    EXPECT_BINRESULT(priv::getClosestBin(300, rpmBins), 0, -1.0f);
-    EXPECT_BINRESULT(priv::getClosestBin(7500, rpmBins), 13, 1.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(300, rpmBins), 0u, -1.0f);
+    EXPECT_BINRESULT(priv::getClosestBin(7500, rpmBins), 13u, 1.0f);
 }

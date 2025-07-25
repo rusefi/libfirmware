@@ -21,7 +21,7 @@ TEST(util, WrapAround62) {
 			delta -= RAND_MAX >> 1;
 
 			// Cap negative test
-			if (delta < 0 && -delta > actual) {
+			if (delta < 0 && uint64_t(-delta) > actual) {
 				delta = -actual;
 			}
 
@@ -37,34 +37,34 @@ TEST(util, WrapAround62) {
 	{
 		WrapAround62 t;
 
-		EXPECT_EQ(t.update(0x03453455), 0x003453455LL);
-		EXPECT_EQ(t.update(0x42342323), 0x042342323LL);
-		EXPECT_EQ(t.update(0x84356345), 0x084356345LL);
-		EXPECT_EQ(t.update(0x42342323), 0x042342323LL);
-		EXPECT_EQ(t.update(0x84356345), 0x084356345LL);
-		EXPECT_EQ(t.update(0xC5656565), 0x0C5656565LL);
-		EXPECT_EQ(t.update(0x01122112), 0x101122112LL); // Wrap around!
-		EXPECT_EQ(t.update(0xC5656565), 0x0C5656565LL);
-		EXPECT_EQ(t.update(0x84356345), 0x084356345LL);
-		EXPECT_EQ(t.update(0xC5656565), 0x0C5656565LL);
-		EXPECT_EQ(t.update(0x01122112), 0x101122112LL); // Wrap around!
-		EXPECT_EQ(t.update(0x42342323), 0x142342323LL);
-		EXPECT_EQ(t.update(0x84356345), 0x184356345LL);
-		EXPECT_EQ(t.update(0x42342323), 0x142342323LL);
-		EXPECT_EQ(t.update(0x84356345), 0x184356345LL);
-		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565LL);
-		EXPECT_EQ(t.update(0x01122112), 0x201122112LL); // Wrap around!
-		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565LL);
-		EXPECT_EQ(t.update(0x84356345), 0x184356345LL);
-		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565LL);
-		EXPECT_EQ(t.update(0x01122112), 0x201122112LL); // Wrap around!
-		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565LL);
-		EXPECT_EQ(t.update(0x84356345), 0x184356345LL);
-		EXPECT_EQ(t.update(0x42342323), 0x142342323LL);
-		EXPECT_EQ(t.update(0x01122112), 0x101122112LL);
-		EXPECT_EQ(t.update(0x84356345), 0x084356345LL);
-		EXPECT_EQ(t.update(0x42342323), 0x042342323LL);
-		EXPECT_EQ(t.update(0x03453455), 0x003453455LL);
+		EXPECT_EQ(t.update(0x03453455), 0x003453455ull);
+		EXPECT_EQ(t.update(0x42342323), 0x042342323ull);
+		EXPECT_EQ(t.update(0x84356345), 0x084356345ull);
+		EXPECT_EQ(t.update(0x42342323), 0x042342323ull);
+		EXPECT_EQ(t.update(0x84356345), 0x084356345ull);
+		EXPECT_EQ(t.update(0xC5656565), 0x0C5656565ull);
+		EXPECT_EQ(t.update(0x01122112), 0x101122112ull); // Wrap around!
+		EXPECT_EQ(t.update(0xC5656565), 0x0C5656565ull);
+		EXPECT_EQ(t.update(0x84356345), 0x084356345ull);
+		EXPECT_EQ(t.update(0xC5656565), 0x0C5656565ull);
+		EXPECT_EQ(t.update(0x01122112), 0x101122112ull); // Wrap around!
+		EXPECT_EQ(t.update(0x42342323), 0x142342323ull);
+		EXPECT_EQ(t.update(0x84356345), 0x184356345ull);
+		EXPECT_EQ(t.update(0x42342323), 0x142342323ull);
+		EXPECT_EQ(t.update(0x84356345), 0x184356345ull);
+		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565ull);
+		EXPECT_EQ(t.update(0x01122112), 0x201122112ull); // Wrap around!
+		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565ull);
+		EXPECT_EQ(t.update(0x84356345), 0x184356345ull);
+		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565ull);
+		EXPECT_EQ(t.update(0x01122112), 0x201122112ull); // Wrap around!
+		EXPECT_EQ(t.update(0xC5656565), 0x1C5656565ull);
+		EXPECT_EQ(t.update(0x84356345), 0x184356345ull);
+		EXPECT_EQ(t.update(0x42342323), 0x142342323ull);
+		EXPECT_EQ(t.update(0x01122112), 0x101122112ull);
+		EXPECT_EQ(t.update(0x84356345), 0x084356345ull);
+		EXPECT_EQ(t.update(0x42342323), 0x042342323ull);
+		EXPECT_EQ(t.update(0x03453455), 0x003453455ull);
 	}
 }
 
