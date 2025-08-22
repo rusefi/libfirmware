@@ -27,7 +27,7 @@ enum class bench_test_packet_ids_e : int32_t {
 	BUTTON_COUNTERS, // 0x770004
 	// ECU output
 	IO_META_INFO,
-	// ECU output
+	// ECU output 0x770006
 	RAW_ANALOG_2,
 	// ECU output
 	PIN_STATE, // 0x770007
@@ -53,6 +53,10 @@ enum class bench_test_packet_ids_e : int32_t {
 	ECU_SET_CALIBRATION,
 	// ECU input 0x770012
 	ECU_REQ_CALIBRATION,
+	// ECU output 0x770013
+	RAW_LUA_ANALOG_1,
+	// ECU output 0x770014
+	RAW_LUA_ANALOG_2,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
