@@ -72,6 +72,7 @@ void cyclic_buffer<T, maxSize>::add(T value) {
 	count = count + 1;
 }
 
+// todo: something is weird see 'TEST(CyclicBuffer, Contains)' see https://github.com/rusefi/rusefi/issues/4455
 template<typename T, size_t maxSize>
 bool cyclic_buffer<T, maxSize>::contains(T value) const {
 	for (int i = 0; i < currentIndex ; i++) {
