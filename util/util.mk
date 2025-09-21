@@ -3,6 +3,7 @@ RUSEFI_LIB_INC += $(RUSEFI_LIB)/util/include $(RUSEFI_LIB)/util/include/rusefi/c
 RUSEFI_LIB_CPP += \
 	$(RUSEFI_LIB)/util/src/util_dummy.cpp \
 	$(RUSEFI_LIB)/util/src/crc.cpp \
+	$(RUSEFI_LIB)/util/src/efistring.cpp \
 	$(RUSEFI_LIB)/util/src/efistringutil.cpp \
 	$(RUSEFI_LIB)/util/src/fragments.cpp \
 	$(RUSEFI_LIB)/util/src/rusefi_math.cpp \
