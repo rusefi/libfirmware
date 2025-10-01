@@ -57,6 +57,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	RAW_LUA_ANALOG_1,
 	// ECU output 0x770014
 	RAW_LUA_ANALOG_2,
+	// ECU input 0x770015 - vehicle speed from external GPS
+	ECU_GPS_INPUT,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
