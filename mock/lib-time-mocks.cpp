@@ -1,23 +1,27 @@
 #include <rusefi/rusefi_time_math.h>
 
-static int timeNowUs = 0;
+static efitick_t timeNowNt = 0;
+
+efitick_t getTimeNowNt() {
+	return timeNowNt;
+}
 
 efitimeus_t getTimeNowUs() {
-	return timeNowUs;
+	return NT2US(getTimeNowNt());
 }
 
 efitimesec_t getTimeNowS() {
 	return getTimeNowUs() / 1000 / 1000;
 }
 
-efitick_t getTimeNowNt() {
-	return getTimeNowUs() * US_TO_NT_MULTIPLIER;
+void setTimeNowNt(efitick_t nt) {
+	timeNowNt = nt;
 }
 
 void setTimeNowUs(int us) {
-	timeNowUs = us;
+	setTimeNowNt(USF2NT((efitick_t)us));
 }
 
 void advanceTimeUs(int us) {
-	timeNowUs += us;
+	timeNowNt += USF2NT((efitick_t)us);
 }

@@ -17,6 +17,7 @@
 
 #if EFI_UNIT_TEST
 // In unit tests, we can time travel...
+void setTimeNowNt(efitick_t nt);
 void setTimeNowUs(int us);
 void advanceTimeUs(int us);
 #endif
