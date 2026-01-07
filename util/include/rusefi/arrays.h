@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <cstring>
+#include <cmath>
 
 #include "scaled_channel.h"
 #include "critical_error.h"
@@ -38,6 +39,48 @@ constexpr void copyArrayPartial(TElement (&dest)[NDest], const TElement (&src)[N
 
 	for (size_t i = 0; i < NSrc; i++) {
 		dest[i] = src[i];
+	}
+}
+
+/**
+ * Copies an array from src to dest.  The lengths can be different
+ * if dest is larger, the array is interpolated, otherwise, values are stepped to preserve the range
+ * on interpolation we use float and then cast to DElement
+ */
+template <typename DElement, typename SElement, size_t NDest, size_t NSrc, int roundDigits = 2>
+constexpr void copyArrayInterpolated(DElement (&dest)[NDest], const SElement (&src)[NSrc]) {
+	if constexpr (NDest == NSrc) {
+		// Same size - direct copy
+		copyArray(dest, src);
+	} else if constexpr (NDest > NSrc) {
+		// Destination larger - interpolate
+		const float roundScale = pow(10, roundDigits);
+		constexpr float step = static_cast<float>(NSrc - 1) / (NDest - 1);
+
+		for (size_t i = 0; i < NDest; i++) {
+			const float currentSrcPos = static_cast<float>(i) * step;
+			auto srcIdx = static_cast<size_t>(currentSrcPos);
+			const float frac = currentSrcPos - static_cast<float>(srcIdx);
+
+			if (srcIdx >= NSrc - 1) {
+				dest[i] = src[NSrc - 1];
+			} else {
+				float interpolated = static_cast<float>(src[srcIdx]) * (1.0f - frac) + static_cast<float>(src[srcIdx + 1]) * frac;
+				if constexpr (roundDigits >= 0) {
+					// Round to specified decimal places
+					float rounded = static_cast<float>(static_cast<int>(interpolated * roundScale + 0.5f)) / roundScale;
+					dest[i] = static_cast<DElement>(rounded);
+				} else {
+					dest[i] = static_cast<DElement>(interpolated);
+				}
+			}
+		}
+	} else {
+		// Destination smaller - step through source to preserve range
+		for (size_t i = 0; i < NDest; i++) {
+			size_t srcIdx = i * (NSrc - 1) / (NDest - 1);
+			dest[i] = src[srcIdx];
+		}
 	}
 }
 
