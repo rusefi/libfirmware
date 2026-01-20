@@ -68,4 +68,5 @@
 #define BOARD_ID_E92_A			400
 #define BOARD_ID_81HD_E			401
 #define BOARD_ID_HONDA_OBD1_C			402
-
+#define BOARD_ID_SUBARU			403
+#define BOARD_ID_NANO_A			404
