@@ -63,6 +63,8 @@ enum class bench_test_packet_ids_e : int32_t {
 	ECU_GPS_INPUT,
 	// ECU output 0x770016
 	ECU_IMAGE_INFO,
+	// ECU output CAN iso-tp settings 0x770017
+	ECU_ISO_TP_SETTINGS,
 };
 
 enum class bench_test_magic_numbers_e : int32_t {
