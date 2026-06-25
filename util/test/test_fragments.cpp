@@ -134,14 +134,16 @@ TEST(Util_Fragments, fragments) {
 	resetBuffer();
 
 	{
+		size_t ret;
 		// Check overlap between second fragment and null fragment
 		uint8_t expected[] = {15, 0, 0};
-		copyRange(buffer, fragments, 14, 3);
+		ret = copyRange(buffer, fragments, 14, 3);
+		// returned amout of copied data, does not include zeroed bytes
+		EXPECT_TRUE(ret = 1);
 		EXPECT_TRUE( 0 == std::memcmp(buffer, expected, sizeof(expected)));
 
 		uint8_t *ptr;
 		size_t offset = 14;
-		size_t ret;
 		ret = getRangePtr(&ptr, fragments, offset, 5);
 		EXPECT_TRUE( 1 == ret);
 		EXPECT_TRUE( fragmentBuffer[1].get() + 4 == ptr);
