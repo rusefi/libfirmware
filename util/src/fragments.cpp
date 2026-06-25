@@ -25,6 +25,7 @@ size_t copyRange(uint8_t* destination, FragmentList src, size_t skip, size_t siz
 		if (fragmentIndex >= src.count) {
 			// somehow we are past the end of fragments - fill with zeros
 			memset(destination + destinationIndex, 0, size);
+			destinationIndex += size;
 			return destinationIndex;
 		}
 
