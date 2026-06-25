@@ -129,6 +129,7 @@ endif
 
 ifeq ($(IS_CLANG),1)
   USE_CPPOPT += -Wno-unused-private-field
+  USE_CPPOPT += -Wno-unknown-warning-option -Wno-character-conversion
 else
   USE_CPPOPT += -Werror=class-memaccess
 endif
