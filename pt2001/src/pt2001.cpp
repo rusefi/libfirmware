@@ -95,7 +95,7 @@ void Pt2001Base::writeDram(MC33816Mem addr, uint16_t data) {
 	deselect();
 }
 
-static uint16_t dacEquation(float current) {
+static uint16_t dacEquation(volatile float current) {
 	/*
 		Current, given in A
 		I = (DAC_VALUE * V_DAC_LSB - V_DA_BIAS)/(G_DA_DIFF * R_SENSEx)
