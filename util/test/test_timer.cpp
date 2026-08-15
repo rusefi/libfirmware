@@ -33,3 +33,50 @@ TEST(util, timerResetStampedInTheFuture) {
 
 	setTimeNowNt(0);
 }
+
+/**
+ * US_TO_NT_MULTIPLIER is 100 in this test build, so 32 bits of ticks is just under 43 seconds.
+ * On real ports the horizon ranges from ~25 seconds (kinetis/cypress, multiplier 168) to
+ * ~1073 seconds (stm32, multiplier 4). Timeouts longer than the horizon used to be reported
+ * as elapsed the moment the delta crossed it, because the "delta larger than 32 bits" shortcut
+ * ran before the long-timeout path.
+ */
+TEST(util, timerTimeoutLongerThan32BitsOfTicks) {
+	Timer timer;
+	timer.reset(0);
+
+	// well inside the fast path: nothing surprising
+	setTimeNowNt(USF2NT((efitick_t)20'000'000)); // 20 seconds
+	EXPECT_FALSE(timer.hasElapsedSec(60));
+
+	// past the 32-bit tick horizon but before the requested timeout: NOT elapsed
+	setTimeNowNt(USF2NT((efitick_t)50'000'000)); // 50 seconds
+	EXPECT_FALSE(timer.hasElapsedSec(60));
+
+	setTimeNowNt(USF2NT((efitick_t)61'000'000)); // 61 seconds
+	EXPECT_TRUE(timer.hasElapsedSec(60));
+
+	setTimeNowNt(0);
+}
+
+TEST(util, timerHourLongTimeoutStaysExact) {
+	Timer timer;
+	timer.reset(0);
+
+	setTimeNowNt(USF2NT((efitick_t)3'599'000'000)); // 3599 seconds
+	EXPECT_FALSE(timer.hasElapsedSec(3600));
+
+	setTimeNowNt(USF2NT((efitick_t)3'601'000'000)); // 3601 seconds
+	EXPECT_TRUE(timer.hasElapsedSec(3600));
+
+	setTimeNowNt(0);
+}
+
+TEST(util, brandNewTimerHasElapsedEvenForLongTimeouts) {
+	// "Brand new instances have most recent reset time far in the past" - that promise from the
+	// header must survive the long-timeout path too
+	Timer timer;
+
+	setTimeNowNt(0);
+	EXPECT_TRUE(timer.hasElapsedSec(3600));
+}
