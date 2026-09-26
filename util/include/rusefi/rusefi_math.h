@@ -21,6 +21,7 @@ float maxF(float i1, float i2);
 float minF(float i1, float i2);
 
 // Clamping
+float clampI(int min, int clamp, int max);
 float clampF(float min, float clamp, float max);
 
 // Returns if two floats are within 0.0001

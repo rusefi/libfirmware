@@ -10,6 +10,10 @@ int minI(int i1, int i2) {
 	return i1 < i2 ? i1 : i2;
 }
 
+float clampI(int min, int clamp, int max) {
+	return maxI(min, minI(clamp, max));
+}
+
 float maxF(float i1, float i2) {
 	return i1 > i2 ? i1 : i2;
 }
