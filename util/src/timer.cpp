@@ -37,16 +37,26 @@ bool Timer::hasElapsedUs(float const microseconds) const {
 		return false;
 	}
 
-	// If larger than 32 bits, timer has certainly expired
-	if (delta >= UINT32_MAX) {
-		return true;
-	}
-
 	constexpr float max_32_bit_fit_float{ 4294967295.f };
 
-	if (microseconds >= max_32_bit_fit_float) {
+	// The fast path below truncates both sides to 32 bits, so it is only valid when the timeout
+	// fits in 32 bits AS TICKS - and US_TO_NT_MULTIPLIER can be as large as 168, shrinking the
+	// 32-bit tick horizon to as little as 25 seconds. Longer timeouts compare the full 64-bit
+	// delta, in double so the tick conversion keeps precision. This check must come before the
+	// "delta larger than 32 bits" shortcut: sitting after it, long timeouts were reported as
+	// elapsed the moment the delta crossed the horizon.
+	if (microseconds >= max_32_bit_fit_float / US_TO_NT_MULTIPLIER) {
 		auto const ntDouble{ static_cast<double>(microseconds) * US_TO_NT_MULTIPLIER };
+		if (ntDouble >= static_cast<double>(INT64_MAX)) {
+			// absurdly long timeout: the int64 cast below would be UB, and it cannot have elapsed
+			return false;
+		}
 		return delta > static_cast<efitick_t>(ntDouble);
+	}
+
+	// The timeout fits in 32 bits of ticks, so a delta beyond 32 bits has certainly expired
+	if (delta >= UINT32_MAX) {
+		return true;
 	}
 
 	return static_cast<uint32_t>(delta) > static_cast<uint32_t>(USF2NT(microseconds));
