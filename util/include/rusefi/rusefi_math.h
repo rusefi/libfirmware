@@ -5,6 +5,7 @@
 #include <rusefi/expected.h>
 
 #include <cstddef>
+#include <type_traits>
 
 // absolute value
 constexpr int absI(int value) {
@@ -13,6 +14,18 @@ constexpr int absI(int value) {
 constexpr float absF(float value) {
                        	return value > 0 ? value : -value;
                        }
+
+// Unqualified abs(float) is a trap: the global namespace always has C's int abs(int),
+// while the float/double overloads are only added to it (as `using std::abs`) by the
+// libstdc++ <math.h>/<stdlib.h> compatibility wrappers, not by <cmath>/<cstdlib>. Whether
+// abs(someFloat) truncates to int therefore depends on include order and toolchain:
+// the same line resolved to the float overload on the host but to int abs(int) on
+// arm-none-eabi. This deleted overload turns that silent truncation into a compile
+// error wherever no floating-point overload is in scope; where std::abs(float) is
+// visible the exact non-template match still wins. Spell the intent out instead:
+// std::abs(x), absF(x) or std::fabs(x).
+template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+T abs(T) = delete;
 
 // Min/max
 int maxI(int i1, int i2);

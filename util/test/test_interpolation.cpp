@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+#include <cmath>
+
 #include <rusefi/arrays.h>
 #include <rusefi/interpolation.h>
 
@@ -120,7 +122,7 @@ TEST_F(Test2dTableMassive, t)
 	{ \
 		auto ___temp___ = actual; \
 		EXPECT_EQ(___temp___.Idx, expectedIdx); \
-		EXPECT_NEAR(___temp___.Frac, expectedFrac, abs(expectedFrac / 1e4)); \
+		EXPECT_NEAR(___temp___.Frac, expectedFrac, std::abs(expectedFrac / 1e4)); \
 	}
 
 // Test with small bins: only two values
