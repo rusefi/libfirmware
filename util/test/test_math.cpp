@@ -6,7 +6,7 @@
 TEST(Util_Math, ExpTaylor)
 {
     // test from -2 < x < 0
-    for(float x = -2; x < 0; x += 0.05)
+    for(float x = -2; x < 0; x += 0.05f)
     {
         // Compare taylor to libc implementation
         EXPECT_NEAR(expf_taylor(x), expf(x), 0.01f);

@@ -81,7 +81,7 @@ namespace rusefi::stringutil {
 		float divider = 1.0;
 		// todo: reuse 'pow10' function which we have anyway
 		for (int i = 0; i < decimalLen; i++) {
-			divider = divider * 10.0;
+			divider = divider * 10.0f;
 		}
 		return integerPart + decimal / divider;
 	}

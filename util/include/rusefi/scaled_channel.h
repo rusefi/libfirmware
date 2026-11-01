@@ -32,6 +32,12 @@ public:
 		m_value = val;
 	}
 
+	// Unscaled integer channel assigned from a float: truncates exactly like the implicit
+	// float-to-integer conversion it replaces, but stays explicit under -Wfloat-conversion.
+	// Only floating-point arguments match, so integer arguments still take the T constructor.
+	template <typename F, std::enable_if_t<std::is_floating_point_v<F> && mul == 1 && div == 1 && std::is_integral_v<T>, int> = 0>
+	constexpr scaled_channel(F val) : m_value(static_cast<T>(val)) { }
+
 	// Scale the float in to our scaled channel
 	constexpr scaled_channel(std::conditional_t<mul != 1 || div != 1, float, IncompleteType> val) {
 		m_value = static_cast<T>(std::roundf(val * float(mul) / div));

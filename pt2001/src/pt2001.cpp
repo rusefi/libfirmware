@@ -105,7 +105,7 @@ static uint16_t dacEquation(float current) {
 		G_DA_DIFF = Gain: 5.79, 8.68, [12.53], 19.25
 		R_SENSE = 10mOhm soldered on board
 	*/
-	return ((current * 12.53f * 10) + 250.0f) / 9.77f;
+	return static_cast<uint16_t>(((current * 12.53f * 10) + 250.0f) / 9.77f);
 }
 
 void Pt2001Base::setTimings() {
@@ -144,7 +144,7 @@ void Pt2001Base::setBoostVoltage(float volts) {
 	}
 
 	// There's a 1/32 divider on the input, then the DAC's output is 9.77mV per LSB.  (1 / 32) / 0.00977 = 3.199 counts per volt.
-	uint16_t data = (volts * 3.25f) + 1.584f;
+	uint16_t data = static_cast<uint16_t>((volts * 3.25f) + 1.584f);
 	writeDram(MC33816Mem::Vboost_high, data+1);
 	writeDram(MC33816Mem::Vboost_low, data-1);
 	// Remember to strobe driven!!

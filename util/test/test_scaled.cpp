@@ -12,6 +12,6 @@ TEST(Util_Scaled, float_equals) {
 	scaled_channel<float, 1, 1> s1 = 3;
 	EXPECT_TRUE(f1 == s1);
 
-	scaled_channel<float, 1, 1> s3 = 3.1;
+	scaled_channel<float, 1, 1> s3 = 3.1f;
 	EXPECT_FALSE(f1 == s3);
 }

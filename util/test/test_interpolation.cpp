@@ -9,7 +9,7 @@ TEST(Util_Interpolation, testInterpolate2d) {
 	float bins4[] = { 1, 2, 3, 4 };
 	float values4[] = { 1, 20, 30, 400 };
 
-	int result;
+	float result;
 
 	// Left size
 	result = interpolate2d(0, bins4, values4);

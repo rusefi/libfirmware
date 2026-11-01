@@ -13,7 +13,7 @@
 template <typename DElement, typename SElement, size_t N>
 constexpr void copyArray(DElement (&dest)[N], const SElement (&src)[N]) {
 	for (size_t i = 0; i < N; i++) {
-		dest[i] = src[i];
+		dest[i] = static_cast<DElement>(src[i]);
 	}
 }
 

@@ -53,7 +53,7 @@ struct sent_channel_stat {
 	}
 
 	float getErrorRate() {
-		return 1.0 * getTotalError() / (FrameCnt + getTotalError());
+		return 1.0f * getTotalError() / (FrameCnt + getTotalError());
 	}
 };
 
