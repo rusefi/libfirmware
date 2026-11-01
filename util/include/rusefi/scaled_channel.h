@@ -34,7 +34,7 @@ public:
 
 	// Scale the float in to our scaled channel
 	constexpr scaled_channel(std::conditional_t<mul != 1 || div != 1, float, IncompleteType> val) {
-		m_value = std::roundf(val * float(mul) / div);
+		m_value = static_cast<T>(std::roundf(val * float(mul) / div));
 	}
 
 	// Only allow conversion directly to T when mul/div are both 1, otherwise this operator doesn't exist and the float conversion is used.
