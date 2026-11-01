@@ -103,6 +103,7 @@ ifeq ($(USE_OPT),)
   #USE_OPT = $(RFLAGS) -O2 -fgnu89-inline -ggdb -fomit-frame-pointer -falign-functions=16 -std=gnu99 -Werror-implicit-function-declaration -Werror -Wno-error=pointer-sign -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers
   USE_OPT = -c -Wall -Werror=shadow -Wextra -pedantic -O0 -ggdb -g -fno-omit-frame-pointer
   USE_OPT += -Werror=missing-field-initializers
+  USE_OPT += -Werror=float-conversion
 endif
 
 # C specific options here (added to USE_OPT).
