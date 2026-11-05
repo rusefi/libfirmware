@@ -6,6 +6,13 @@
 
 #include <rusefi/rusefi_time_types.h>
 
+// When set, Timer::getElapsedUs() computes long (>16s) deltas in float instead of double.
+// Costs at most one float ULP of precision; avoids soft-float double libcalls on targets
+// without a hardware double FPU.
+#ifndef getElapsedUs_STAY_IN_FLOAT
+#define getElapsedUs_STAY_IN_FLOAT 0
+#endif
+
 /**
  * Helper class with "has X amount of time elapsed since most recent reset" methods
  * Brand new instances have most recent reset time far in the past, i.e. "hasElapse" is true for any reasonable range

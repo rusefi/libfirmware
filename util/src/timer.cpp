@@ -81,6 +81,17 @@ float Timer::getElapsedUs(efitick_t const nowNt) const {
 	// Wraparound is not considered
 	auto const delta32{ getElapsedNt(nowNt) };
 
+#if getElapsedUs_STAY_IN_FLOAT
+	// A float holds the tick count exactly only up to 24 bits (16777216 ticks = 16.8s at 1MHz,
+	// proportionally less on faster chips). Above that the float conversion rounds the tick
+	// count, but the result is returned as a float in microseconds with the same relative
+	// precision, so computing the long-delta case in double changes the returned value by at
+	// most one float ULP. Stay in float: on targets without hardware double
+	// the double path is a permanent soft-float libcall for every timer that is not reset for
+	// more than ~16s, and several are read from fast callbacks.
+	auto const delta32f{ static_cast<float>(delta32) };
+	return static_cast<float>(NT2US(delta32f));
+#else
 	// One second at 168mhz is 168 mil of ticks
 	// float loses precision after 24bit ~ 16777216us;
 	// 16777216us / 1mil ~ 16.8s. So after 16s we lose precision
@@ -99,6 +110,7 @@ float Timer::getElapsedUs(efitick_t const nowNt) const {
 	// Ok less than 16s so can be float for faster calc while keeping precision
 	auto const delta32f{ static_cast<float>(delta32) };
 	return static_cast<float>(NT2US(delta32f));
+#endif
 }
 
 float Timer::getElapsedSecondsAndReset(efitick_t const nowNt) {
