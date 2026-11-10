@@ -89,3 +89,5 @@
 #define STATIC_BOARD_ID_E78             (STATIC_BOARD_ID_BASE + 72)
 #define STATIC_BOARD_ID_E82             (STATIC_BOARD_ID_BASE + 73)
 #define STATIC_BOARD_ID_E92             (STATIC_BOARD_ID_BASE + 74)
+#define STATIC_BOARD_ID_E38             (STATIC_BOARD_ID_BASE + 75)
+#define STATIC_BOARD_ID_E67             (STATIC_BOARD_ID_BASE + 76)
